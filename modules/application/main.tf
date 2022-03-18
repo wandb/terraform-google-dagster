@@ -104,9 +104,4 @@ EOT
     name  = "postgresql.postgresqlPassword"
     value = var.database_password
   }
-
-  # Service must be able to connect to the user deployment before startup as it
-  # is expecting the workspace to be made available over gRPC on the defined port
-  # that's shared between the two releases.
-  depends_on = [helm_release.user_deployment]
 }
