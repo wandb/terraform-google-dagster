@@ -13,6 +13,11 @@ variable "service_account" {
   type        = object({ email = string, account_id = string })
 }
 
+variable "service_account_json" {
+  type        = string
+  description = "Service account json key to grant permissions for registry image pulling."
+}
+
 variable "network" {
   description = "Google Compute Engine network to which the cluster is connected."
   type        = object({ self_link = string })
@@ -21,4 +26,9 @@ variable "network" {
 variable "subnetwork" {
   description = "Google Compute Engine subnetwork in which the cluster's instances are launched."
   type        = object({ self_link = string })
+}
+
+variable "registry" {
+  type        = object({ id = string })
+  description = "Artifact registry used for pulling code deployment images."
 }

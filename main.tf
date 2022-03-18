@@ -68,16 +68,6 @@ module "networking" {
   namespace = var.namespace
 }
 
-module "cluster" {
-  source               = "./modules/cluster"
-  namespace            = var.namespace
-  compute_machine_type = var.compute_machine_type
-
-  network         = module.networking.network
-  subnetwork      = module.networking.subnetwork
-  service_account = module.service_account.sa
-}
-
 module "database" {
   source              = "./modules/database"
   namespace           = var.namespace
@@ -103,6 +93,20 @@ provider "kubernetes" {
   token                  = data.google_client_config.current.access_token
 }
 
+module "cluster" {
+  source               = "./modules/cluster"
+  namespace            = var.namespace
+  compute_machine_type = var.compute_machine_type
+
+  network              = module.networking.network
+  subnetwork           = module.networking.subnetwork
+  service_account      = module.service_account.sa
+  service_account_json = module.service_account.credentials
+  registry             = module.registry.registry
+
+  depends_on = [module.registry]
+}
+
 provider "helm" {
   kubernetes {
     host                   = "https://${module.cluster.cluster_endpoint}"
@@ -112,16 +116,15 @@ provider "helm" {
 }
 
 module "dagster" {
-  source                   = "./modules/application"
-  dagster_deployment_image = var.dagster_deployment_image
-  dagster_deployment_tag   = var.dagster_deployment_tag
+  source          = "./modules/application"
+  dagster_version = var.dagster_version
+  # dagster_deployment_image = var.dagster_deployment_image
+  # dagster_deployment_tag   = var.dagster_deployment_tag
 
-  registry             = module.registry.registry
-  service_account_json = module.service_account.credentials
-  database_host        = module.database.private_ip_address
-  database_name        = module.database.database_name
-  database_password    = module.database.password
-  database_username    = module.database.username
+  # database_host     = module.database.private_ip_address
+  # database_name     = module.database.database_name
+  # database_password = module.database.password
+  # database_username = module.database.username
 
   depends_on = [module.cluster, module.registry, module.database, module.service_account]
 }

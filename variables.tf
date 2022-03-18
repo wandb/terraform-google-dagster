@@ -36,13 +36,25 @@ variable "dagster_version" {
   description = "Version of Dagster to deploy"
 }
 
-variable "dagster_deployment_image" {
+variable "user_code_chart_path" {
   type        = string
-  description = "Image name of user code deployment"
+  default     = null
+  description = "Path to Helm chart values for user code deployment"
 }
 
-variable "dagster_deployment_tag" {
+variable "service_chart_path" {
   type        = string
-  default     = "latest"
-  description = "Image tag of user code deployment"
+  default     = null
+  description = "Path to Helm chart values for Dagster services"
 }
+
+# variable "dagster_deployment_image" {
+#   type        = string
+#   description = "Image name of user code deployment"
+# }
+
+# variable "dagster_deployment_tag" {
+#   type        = string
+#   default     = "latest"
+#   description = "Image tag of user code deployment"
+# }

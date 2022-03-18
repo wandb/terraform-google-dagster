@@ -15,14 +15,29 @@ output "bucket_name" {
   value = module.storage.bucket_name
 }
 
-output "registry_id" {
-  value = module.registry.registry.id
-}
-
 output "network_id" {
   value = module.networking.network.id
 }
 
-output "database_private_ip" {
+### Needed for Helm chart values
+
+output "docker_image_path" {
+  value = module.registry.docker_image_path
+}
+
+output "database_host" {
   value = module.database.private_ip_address
+}
+
+output "database_name" {
+  value = module.database.database_name
+}
+
+output "database_username" {
+  value = module.database.username
+}
+
+output "database_password" {
+  sensitive = true
+  value     = module.database.password
 }

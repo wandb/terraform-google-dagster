@@ -4,50 +4,52 @@ variable "dagster_version" {
   description = "Version of Dagster to deploy"
 }
 
-variable "dagster_deployment_image" {
+variable "user_code_chart_path" {
   type        = string
-  description = "Image name of user code deployment"
+  default     = null
+  description = "Path to Helm chart values for user code deployment"
 }
 
-variable "dagster_deployment_tag" {
+variable "service_chart_path" {
   type        = string
-  default     = "latest"
-  description = "User code deployment tag of Dagster to deploy"
+  default     = null
+  description = "Path to Helm chart values for Dagster services"
 }
 
-variable "deployment_port" {
-  type        = number
-  default     = 3030
-  description = "gRPC port to expose code deployment code."
-}
+# variable "dagster_deployment_image" {
+#   type        = string
+#   description = "Image name of user code deployment"
+# }
 
-variable "registry" {
-  type        = object({ id = string, location = string, repository_id = string, project = string })
-  description = "Artifact registry used for pulling code deployment images."
-}
+# variable "dagster_deployment_tag" {
+#   type        = string
+#   default     = "latest"
+#   description = "User code deployment tag of Dagster to deploy"
+# }
 
-variable "service_account_json" {
-  type        = string
-  description = "Service account json key to grant permissions for registry image pulling."
-}
+# variable "deployment_port" {
+#   type        = number
+#   default     = 3030
+#   description = "gRPC port to expose code deployment code."
+# }
 
-variable "database_host" {
-  type        = string
-  description = "Host of Dagster metadata database instance."
-}
+# variable "database_host" {
+#   type        = string
+#   description = "Host of Dagster metadata database instance."
+# }
 
-variable "database_username" {
-  type        = string
-  description = "User for Dagster metadata database instance."
-}
+# variable "database_username" {
+#   type        = string
+#   description = "User for Dagster metadata database instance."
+# }
 
-variable "database_password" {
-  type        = string
-  sensitive   = true
-  description = "Password for Dagster metadata database instance."
-}
+# variable "database_password" {
+#   type        = string
+#   sensitive   = true
+#   description = "Password for Dagster metadata database instance."
+# }
 
-variable "database_name" {
-  type        = string
-  description = "Name of Dagster metadata database instance."
-}
+# variable "database_name" {
+#   type        = string
+#   description = "Name of Dagster metadata database instance."
+# }
