@@ -96,10 +96,14 @@ postgresql:
   enabled: false
   postgresqlHost: "${var.database_host}"
   postgresqlUsername: "${var.database_username}"
-  postgresqlPassword: "${var.database_password}"
   postgresqlDatabase: "${var.database_name}"
 EOT
   ]
+
+  set_sensitive {
+    name  = "postgresql.postgresqlPassword"
+    value = var.database_password
+  }
 
   # Service must be able to connect to the user deployment before startup as it
   # is expecting the workspace to be made available over gRPC on the defined port
