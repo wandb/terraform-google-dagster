@@ -23,7 +23,7 @@ resource "google_container_node_pool" "default" {
   node_count = 2
 
   node_config {
-    machine_type    = var.compute_machine_tier
+    machine_type    = var.compute_machine_type
     service_account = var.service_account.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/bigtable.admin",
