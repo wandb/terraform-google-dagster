@@ -29,32 +29,3 @@ variable "deletion_protection" {
   default     = true
   description = "Indicates whether or not storage and databases have deletion protection enabled"
 }
-
-variable "dagster_version" {
-  type        = string
-  default     = "0.14.3"
-  description = "Version of Dagster to deploy"
-}
-
-variable "user_code_chart_path" {
-  type        = string
-  default     = null
-  description = "Path to Helm chart values for user code deployment"
-}
-
-variable "service_chart_path" {
-  type        = string
-  default     = null
-  description = "Path to Helm chart values for Dagster services"
-}
-
-# variable "dagster_deployment_image" {
-#   type        = string
-#   description = "Image name of user code deployment"
-# }
-
-# variable "dagster_deployment_tag" {
-#   type        = string
-#   default     = "latest"
-#   description = "Image tag of user code deployment"
-# }

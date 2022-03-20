@@ -19,14 +19,17 @@ output "network_id" {
   value = module.networking.network.id
 }
 
-### Needed for Helm chart values
-
-output "docker_image_path" {
-  value = module.registry.docker_image_path
+output "database" {
+  value     = module.database.database
+  sensitive = true
 }
 
-output "database_host" {
-  value = module.database.private_ip_address
+output "registry_image_path" {
+  value = module.registry.image_path
+}
+
+output "private_docker_config_secret" {
+  value = module.kubernetes_config.private_docker_config_secret
 }
 
 output "database_name" {

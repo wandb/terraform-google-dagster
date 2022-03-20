@@ -5,6 +5,16 @@ locals {
   output_password      = google_sql_user.default.password
 }
 
+output "database" {
+  value = {
+    host     = local.output_private_ip
+    name     = local.output_database_name
+    username = local.output_username
+    password = local.output_password
+  }
+  description = "Database connection parameters"
+}
+
 output "private_ip_address" {
   value       = local.output_private_ip
   description = "The private IP address of the SQL database instance."

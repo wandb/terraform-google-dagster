@@ -3,8 +3,7 @@ output "registry" {
   value       = google_artifact_registry_repository.default
 }
 
-output "docker_image_path" {
-  description = "Host to point docker client to when fetching remote images."
+output "image_path" {
+  description = "Path to registry repository images (ex: example_repo-docker.pkg.dev/my-project/dagster-images)"
   value       = "${google_artifact_registry_repository.default.location}-docker.pkg.dev/${google_artifact_registry_repository.default.project}/${google_artifact_registry_repository.default.repository_id}"
 }
-

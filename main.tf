@@ -22,11 +22,6 @@ module "project_factory_project_services" {
 
 terraform {
   required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.4.1"
-    }
-
     google = {
       source  = "hashicorp/google"
       version = "4.13.0"
@@ -86,45 +81,17 @@ module "registry" {
 
 data "google_client_config" "current" {}
 
-# Needed separately to provision Kubernetes objects natively
 provider "kubernetes" {
   host                   = "https://${module.cluster.cluster_endpoint}"
   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
   token                  = data.google_client_config.current.access_token
 }
 
-module "cluster" {
-  source               = "./modules/cluster"
-  namespace            = var.namespace
-  compute_machine_type = var.compute_machine_type
+module "kubernetes_config" {
+  source = "./modules/kubernetes_config"
 
-  network              = module.networking.network
-  subnetwork           = module.networking.subnetwork
-  service_account      = module.service_account.sa
-  service_account_json = module.service_account.credentials
   registry             = module.registry.registry
+  service_account_json = module.service_account.credentials
 
-  depends_on = [module.registry]
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = "https://${module.cluster.cluster_endpoint}"
-    cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-    token                  = data.google_client_config.current.access_token
-  }
-}
-
-module "dagster" {
-  source          = "./modules/application"
-  dagster_version = var.dagster_version
-  # dagster_deployment_image = var.dagster_deployment_image
-  # dagster_deployment_tag   = var.dagster_deployment_tag
-
-  # database_host     = module.database.private_ip_address
-  # database_name     = module.database.database_name
-  # database_password = module.database.password
-  # database_username = module.database.username
-
-  depends_on = [module.cluster, module.registry, module.database, module.service_account]
+  depends_on = [module.cluster, module.registry, module.service_account]
 }
