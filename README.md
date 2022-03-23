@@ -97,6 +97,7 @@ Once you have these dependencies installed you can execute the following:
 
 ```
 pre-commit install
+pre-commit install --hook-type commit-msg  # installs the hook for commit messages to enforce conventional commits
 pre-commit run -a  # this will run pre-commit across all files in the project to validate installation
 ```
 
