@@ -6,31 +6,22 @@ module "project_factory_project_services" {
   project_id = null
 
   activate_apis = [
-    "iam.googleapis.com",               // Service accounts
-    "logging.googleapis.com",           // Logging
-    "sqladmin.googleapis.com",          // Database
-    "networkmanagement.googleapis.com", // Networking
-    "servicenetworking.googleapis.com", // Networking
-    "storage.googleapis.com",           // Cloud Storage
-    "artifactregistry.googleapis.com",  // Artifact Registry
-    "container.googleapis.com",         // Kubernetes
-    "compute.googleapis.com"            // Kubernetes
+    "iam.googleapis.com",               # Service accounts
+    "logging.googleapis.com",           # Logging
+    "sqladmin.googleapis.com",          # Database
+    "networkmanagement.googleapis.com", # Networking
+    "servicenetworking.googleapis.com", # Networking
+    "storage.googleapis.com",           # Cloud Storage
+    "artifactregistry.googleapis.com",  # Artifact Registry
+    "container.googleapis.com",         # Kubernetes
+    "compute.googleapis.com"            # Kubernetes
   ]
   disable_dependent_services  = false
   disable_services_on_destroy = false
 }
 
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.13.0"
-    }
-  }
-}
-
-# Required for Artifact Registry. Base google provider does not have support for this
-# cloud resource.
+# Required for Artifact Registry. Google provider does not have 
+# support for this cloud resource.
 provider "google-beta" {
   project = var.project_id
   region  = var.region
@@ -49,34 +40,45 @@ module "service_account" {
 }
 
 module "storage" {
-  source              = "./modules/storage"
-  namespace           = var.namespace
-  deletion_protection = var.deletion_protection
+  source                        = "./modules/storage"
+  namespace                     = var.namespace
+  deletion_protection           = var.deletion_protection
+  cloud_storage_bucket_location = var.cloud_storage_bucket_location
 
-  bucket_location = "US"
-  service_account = module.service_account.sa
+  service_account = module.service_account.service_account
+
+  depends_on = [module.service_account]
 }
 
 module "networking" {
-  source = "./modules/networking"
-
+  source    = "./modules/networking"
   namespace = var.namespace
+}
+
+module "cluster" {
+  source                       = "./modules/cluster"
+  namespace                    = var.namespace
+  cluster_compute_machine_type = var.cluster_compute_machine_type
+  cluster_node_count           = var.cluster_node_count
+
+  network         = module.networking.network
+  subnetwork      = module.networking.subnetwork
+  service_account = module.service_account.service_account
+
+  depends_on = [module.networking, module.service_account]
 }
 
 module "database" {
-  source              = "./modules/database"
-  namespace           = var.namespace
-  deletion_protection = var.deletion_protection
+  source                     = "./modules/database"
+  namespace                  = var.namespace
+  deletion_protection        = var.deletion_protection
+  cloudsql_postgres_version  = var.cloudsql_postgres_version
+  cloudsql_tier              = var.cloudsql_tier
+  cloudsql_availability_type = var.cloudsql_availability_type
 
   network_connection = module.networking.connection
-}
 
-module "registry" {
-  source    = "./modules/registry"
-  namespace = var.namespace
-  location  = var.region
-
-  service_account = module.service_account.sa
+  depends_on = [module.networking]
 }
 
 data "google_client_config" "current" {}
@@ -87,11 +89,15 @@ provider "kubernetes" {
   token                  = data.google_client_config.current.access_token
 }
 
-module "kubernetes_config" {
-  source = "./modules/kubernetes_config"
+module "registry" {
+  source    = "./modules/registry"
+  namespace = var.namespace
+  location  = var.region
 
-  registry             = module.registry.registry
-  service_account_json = module.service_account.credentials
+  service_account             = module.service_account.service_account
+  service_account_credentials = module.service_account.service_account_credentials
 
-  depends_on = [module.cluster, module.registry, module.service_account]
+  # Depends on cluster existing as Kubernetes secret will be created containing an imagePullSecret
+  # with Docker config for private registry
+  depends_on = [module.cluster, module.service_account]
 }

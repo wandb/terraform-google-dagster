@@ -1,31 +1,61 @@
 variable "project_id" {
-  type        = string
   description = "Project ID"
+  type        = string
 }
 
 variable "region" {
-  type        = string
   description = "Google region"
+  type        = string
 }
 
 variable "zone" {
-  type        = string
   description = "Google zone"
+  type        = string
 }
 
 variable "namespace" {
-  type        = string
   description = "Namespace used as a prefix for all resources"
-}
-
-variable "compute_machine_type" {
   type        = string
-  default     = "e2-standard-2"
-  description = "Compute machine type to deploy cluster nodes on."
 }
 
 variable "deletion_protection" {
+  description = "Indicates whether or not storage and databases have deletion protection enabled"
   type        = bool
   default     = true
-  description = "Indicates whether or not storage and databases have deletion protection enabled"
+}
+
+variable "cloud_storage_bucket_location" {
+  description = "Location to create cloud storage bucket in."
+  type        = string
+  default     = "US"
+}
+
+variable "cloudsql_postgres_version" {
+  description = "The postgres version of the CloudSQL instance."
+  type        = string
+  default     = "POSTGRES_14"
+}
+
+variable "cloudsql_tier" {
+  description = "The machine type to use"
+  type        = string
+  default     = "db-f1-micro"
+}
+
+variable "cloudsql_availability_type" {
+  description = "The availability type of the Cloud SQL instance."
+  type        = string
+  default     = "ZONAL"
+}
+
+variable "cluster_compute_machine_type" {
+  description = "Compute machine type to deploy cluster nodes on."
+  type        = string
+  default     = "e2-standard-2"
+}
+
+variable "cluster_node_count" {
+  description = "Number of nodes to create in cluster."
+  type        = number
+  default     = 2
 }

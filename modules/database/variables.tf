@@ -11,15 +11,19 @@ variable "network_connection" {
 variable "deletion_protection" {
   description = "If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to `true`."
   type        = bool
-  default     = true
 }
 
-variable "tier" {
-  type    = string
-  default = "db-f1-micro"
+variable "cloudsql_postgres_version" {
+  description = "The postgres version of the CloudSQL instance."
+  type        = string
 }
 
-variable "availability_type" {
-  type    = string
-  default = "ZONAL"
+variable "cloudsql_tier" {
+  description = "The CloudSQL machine tier to use."
+  type        = string
+}
+
+variable "cloudsql_availability_type" {
+  description = "The availability type of the CloudSQL instance."
+  type        = string
 }
