@@ -15,6 +15,6 @@ output "cluster_self_link" {
   value = google_container_cluster.default.self_link
 }
 
-output "node_pool" {
+output "cluster_node_pool" {
   value = google_container_node_pool.default
 }

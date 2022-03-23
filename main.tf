@@ -6,36 +6,22 @@ module "project_factory_project_services" {
   project_id = null
 
   activate_apis = [
-    "iam.googleapis.com",               // Service accounts
-    "logging.googleapis.com",           // Logging
-    "sqladmin.googleapis.com",          // Database
-    "networkmanagement.googleapis.com", // Networking
-    "servicenetworking.googleapis.com", // Networking
-    "storage.googleapis.com",           // Cloud Storage
-    "artifactregistry.googleapis.com",  // Artifact Registry
-    "container.googleapis.com",         // Kubernetes
-    "compute.googleapis.com"            // Kubernetes
+    "iam.googleapis.com",               # Service accounts
+    "logging.googleapis.com",           # Logging
+    "sqladmin.googleapis.com",          # Database
+    "networkmanagement.googleapis.com", # Networking
+    "servicenetworking.googleapis.com", # Networking
+    "storage.googleapis.com",           # Cloud Storage
+    "artifactregistry.googleapis.com",  # Artifact Registry
+    "container.googleapis.com",         # Kubernetes
+    "compute.googleapis.com"            # Kubernetes
   ]
   disable_dependent_services  = false
   disable_services_on_destroy = false
 }
 
-terraform {
-  required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.4.1"
-    }
-
-    google = {
-      source  = "hashicorp/google"
-      version = "4.13.0"
-    }
-  }
-}
-
-# Required for Artifact Registry. Base google provider does not have support for this
-# cloud resource.
+# Required for Artifact Registry. Google provider does not have
+# support for this cloud resource.
 provider "google-beta" {
   project = var.project_id
   region  = var.region
@@ -54,26 +40,53 @@ module "service_account" {
 }
 
 module "storage" {
-  source              = "./modules/storage"
-  namespace           = var.namespace
-  deletion_protection = var.deletion_protection
+  source                        = "./modules/storage"
+  namespace                     = var.namespace
+  deletion_protection           = var.deletion_protection
+  cloud_storage_bucket_location = var.cloud_storage_bucket_location
 
-  bucket_location = "US"
-  service_account = module.service_account.sa
+  service_account = module.service_account.service_account
+
+  depends_on = [module.service_account]
 }
 
 module "networking" {
-  source = "./modules/networking"
-
+  source    = "./modules/networking"
   namespace = var.namespace
 }
 
+module "cluster" {
+  source                       = "./modules/cluster"
+  namespace                    = var.namespace
+  cluster_compute_machine_type = var.cluster_compute_machine_type
+  cluster_node_count           = var.cluster_node_count
+
+  network         = module.networking.network
+  subnetwork      = module.networking.subnetwork
+  service_account = module.service_account.service_account
+
+  depends_on = [module.networking, module.service_account]
+}
+
 module "database" {
-  source              = "./modules/database"
-  namespace           = var.namespace
-  deletion_protection = var.deletion_protection
+  source                     = "./modules/database"
+  namespace                  = var.namespace
+  deletion_protection        = var.deletion_protection
+  cloudsql_postgres_version  = var.cloudsql_postgres_version
+  cloudsql_tier              = var.cloudsql_tier
+  cloudsql_availability_type = var.cloudsql_availability_type
 
   network_connection = module.networking.connection
+
+  depends_on = [module.networking]
+}
+
+data "google_client_config" "current" {}
+
+provider "kubernetes" {
+  host                   = "https://${module.cluster.cluster_endpoint}"
+  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
+  token                  = data.google_client_config.current.access_token
 }
 
 module "registry" {
@@ -81,50 +94,10 @@ module "registry" {
   namespace = var.namespace
   location  = var.region
 
-  service_account = module.service_account.sa
-}
+  service_account             = module.service_account.service_account
+  service_account_credentials = module.service_account.service_account_credentials
 
-data "google_client_config" "current" {}
-
-# Needed separately to provision Kubernetes objects natively
-provider "kubernetes" {
-  host                   = "https://${module.cluster.cluster_endpoint}"
-  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-  token                  = data.google_client_config.current.access_token
-}
-
-module "cluster" {
-  source               = "./modules/cluster"
-  namespace            = var.namespace
-  compute_machine_type = var.compute_machine_type
-
-  network              = module.networking.network
-  subnetwork           = module.networking.subnetwork
-  service_account      = module.service_account.sa
-  service_account_json = module.service_account.credentials
-  registry             = module.registry.registry
-
-  depends_on = [module.registry]
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = "https://${module.cluster.cluster_endpoint}"
-    cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-    token                  = data.google_client_config.current.access_token
-  }
-}
-
-module "dagster" {
-  source          = "./modules/application"
-  dagster_version = var.dagster_version
-  # dagster_deployment_image = var.dagster_deployment_image
-  # dagster_deployment_tag   = var.dagster_deployment_tag
-
-  # database_host     = module.database.private_ip_address
-  # database_name     = module.database.database_name
-  # database_password = module.database.password
-  # database_username = module.database.username
-
-  depends_on = [module.cluster, module.registry, module.database, module.service_account]
+  # Depends on cluster existing as Kubernetes secret will be created containing an imagePullSecret
+  # with Docker config for private registry
+  depends_on = [module.cluster, module.service_account]
 }

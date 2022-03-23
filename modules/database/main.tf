@@ -4,21 +4,20 @@ resource "random_string" "master_password" {
 }
 
 locals {
-  database_name        = var.namespace
-  master_username      = var.namespace
-  master_password      = random_string.master_password.result
-  master_instance_name = var.namespace
+  database_name   = var.namespace
+  master_username = var.namespace
+  master_password = random_string.master_password.result
 }
 
 resource "google_sql_database_instance" "default" {
-  database_version    = "POSTGRES_14"
+  database_version    = var.cloudsql_postgres_version
   name                = local.database_name
   deletion_protection = var.deletion_protection
 
   settings {
-    tier              = var.tier
+    tier              = var.cloudsql_tier
     activation_policy = "ALWAYS"
-    availability_type = var.availability_type
+    availability_type = var.cloudsql_availability_type
 
     ip_configuration {
       ipv4_enabled    = false
@@ -48,10 +47,14 @@ resource "google_sql_database_instance" "default" {
 resource "google_sql_database" "default" {
   name     = local.database_name
   instance = google_sql_database_instance.default.name
+
+  depends_on = [google_sql_database_instance.default]
 }
 
 resource "google_sql_user" "default" {
   instance = google_sql_database_instance.default.name
   name     = local.master_username
   password = local.master_password
+
+  depends_on = [google_sql_database_instance.default]
 }

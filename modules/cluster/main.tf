@@ -20,10 +20,10 @@ resource "google_container_cluster" "default" {
 resource "google_container_node_pool" "default" {
   name       = "default-node-pool"
   cluster    = google_container_cluster.default.id
-  node_count = 2
+  node_count = var.cluster_node_count
 
   node_config {
-    machine_type    = var.compute_machine_type
+    machine_type    = var.cluster_compute_machine_type
     service_account = var.service_account.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/bigtable.admin",

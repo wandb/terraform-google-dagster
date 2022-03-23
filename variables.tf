@@ -1,60 +1,61 @@
 variable "project_id" {
-  type        = string
   description = "Project ID"
+  type        = string
 }
 
 variable "region" {
-  type        = string
   description = "Google region"
+  type        = string
 }
 
 variable "zone" {
-  type        = string
   description = "Google zone"
+  type        = string
 }
 
 variable "namespace" {
-  type        = string
   description = "Namespace used as a prefix for all resources"
-}
-
-variable "compute_machine_type" {
   type        = string
-  default     = "e2-standard-2"
-  description = "Compute machine type to deploy cluster nodes on."
 }
 
 variable "deletion_protection" {
+  description = "Indicates whether or not storage and databases have deletion protection enabled"
   type        = bool
   default     = true
-  description = "Indicates whether or not storage and databases have deletion protection enabled"
 }
 
-variable "dagster_version" {
+variable "cloud_storage_bucket_location" {
+  description = "Location to create cloud storage bucket in."
   type        = string
-  default     = "0.14.3"
-  description = "Version of Dagster to deploy"
+  default     = "US"
 }
 
-variable "user_code_chart_path" {
+variable "cloudsql_postgres_version" {
+  description = "The postgres version of the CloudSQL instance."
   type        = string
-  default     = null
-  description = "Path to Helm chart values for user code deployment"
+  default     = "POSTGRES_14"
 }
 
-variable "service_chart_path" {
+variable "cloudsql_tier" {
+  description = "The machine type to use"
   type        = string
-  default     = null
-  description = "Path to Helm chart values for Dagster services"
+  default     = "db-f1-micro"
 }
 
-# variable "dagster_deployment_image" {
-#   type        = string
-#   description = "Image name of user code deployment"
-# }
+variable "cloudsql_availability_type" {
+  description = "The availability type of the Cloud SQL instance."
+  type        = string
+  default     = "ZONAL"
+}
 
-# variable "dagster_deployment_tag" {
-#   type        = string
-#   default     = "latest"
-#   description = "Image tag of user code deployment"
-# }
+variable "cluster_compute_machine_type" {
+  description = "Compute machine type to deploy cluster nodes on."
+  type        = string
+  default     = "e2-standard-2"
+}
+
+variable "cluster_node_count" {
+  description = "Number of nodes to create in cluster."
+  type        = number
+  default     = 2
+}

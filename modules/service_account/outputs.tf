@@ -1,9 +1,9 @@
-output "credentials" {
-  value       = base64decode(google_service_account_key.main.private_key)
+output "service_account_credentials" {
+  value       = base64decode(google_service_account_key.default.private_key)
   description = "The private key of the service account."
 }
 
-output "sa" {
-  value       = google_service_account.main
+output "service_account" {
+  value       = google_service_account.default
   description = "The service account."
 }

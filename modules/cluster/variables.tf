@@ -1,11 +1,16 @@
 variable "namespace" {
-  type        = string
   description = "The namespace name used as a prefix for all resources created."
+  type        = string
 }
 
-variable "compute_machine_type" {
-  type        = string
+variable "cluster_compute_machine_type" {
   description = "Compute machine type to deploy cluster nodes on."
+  type        = string
+}
+
+variable "cluster_node_count" {
+  description = "Number of nodes to create in cluster."
+  type        = number
 }
 
 variable "service_account" {
