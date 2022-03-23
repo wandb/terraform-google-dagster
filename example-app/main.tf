@@ -116,4 +116,3 @@ resource "helm_release" "dagster_service" {
 
   depends_on = [module.dagster_infra]
 }
-

@@ -8,7 +8,7 @@
 Terraform module to provision required GCP infrastructure necesarry for a Dagster Kubernetes-based deployment.
 
 ## Overview
-The `terraform-google-dagster` module does not attempt to make any assumptions about how your Dagster deployment should look as this can vary widely and will not actually create a Dagster deployment. It _will_ create all of the core foundational components necessary for running a Dagster cluster which should be easily pluggable into the [Dagster Helm chart](https://artifacthub.io/packages/helm/dagster/dagster) or your own Dagster Kubernetes resources. 
+The `terraform-google-dagster` module does not attempt to make any assumptions about how your Dagster deployment should look as this can vary widely and will not actually create a Dagster deployment. It _will_ create all of the core foundational components necessary for running a Dagster cluster which should be easily pluggable into the [Dagster Helm chart](https://artifacthub.io/packages/helm/dagster/dagster) or your own Dagster Kubernetes resources.
 
 The module will provision:
 - **Service account**: This will manage all of the resources associated with your application
@@ -82,3 +82,22 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 | <a name="output_service_account"></a> [service\_account](#output\_service\_account) | n/a |
 | <a name="output_storage_bucket_name"></a> [storage\_bucket\_name](#output\_storage\_bucket\_name) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+# Development
+
+If you'd like to contribute to this repository you'll have a few dependencies you'll need to install before committing. We use `pre-commit` to ensure standards are adhered to by running Terraform validations via git hooks. We specifically use the following packages:
+
+- `terraform_fmt`: No additional depenencies needed for this
+- `terraform_docs`: Installation instructions [here](https://github.com/terraform-docs/terraform-docs)
+- `terraform_tflint`: Installation instructions [here](https://github.com/terraform-linters/tflint)
+
+You'll also need to install [`pre-commit`](https://pre-commit.com/#installation).
+
+Once you have these dependencies installed you can execute the following:
+
+```
+pre-commit install
+pre-commit run -a  # this will run pre-commit across all files in the project to validate installation
+```
+
+Now after creating git commits these commit hooks will execute and ensure your changes adhere to the project standards. In general, we've followed the guidelines for best-practices laid out in [Terraform Best Practices](https://www.terraform-best-practices.com/), it would be recommended to follow these guidelines when submitting any contributions of your own.

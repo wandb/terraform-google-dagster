@@ -20,7 +20,7 @@ module "project_factory_project_services" {
   disable_services_on_destroy = false
 }
 
-# Required for Artifact Registry. Google provider does not have 
+# Required for Artifact Registry. Google provider does not have
 # support for this cloud resource.
 provider "google-beta" {
   project = var.project_id
