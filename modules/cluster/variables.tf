@@ -15,12 +15,7 @@ variable "cluster_node_count" {
 
 variable "service_account" {
   description = "The service account associated with the GKE cluster instances that host Dagster."
-  type        = object({ email = string, account_id = string })
-}
-
-variable "service_account_json" {
-  type        = string
-  description = "Service account json key to grant permissions for registry image pulling."
+  type        = object({ email = string })
 }
 
 variable "network" {
@@ -31,9 +26,4 @@ variable "network" {
 variable "subnetwork" {
   description = "Google Compute Engine subnetwork in which the cluster's instances are launched."
   type        = object({ self_link = string })
-}
-
-variable "registry" {
-  type        = object({ id = string })
-  description = "Artifact registry used for pulling code deployment images."
 }

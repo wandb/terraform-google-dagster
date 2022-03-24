@@ -45,24 +45,3 @@ resource "google_container_node_pool" "default" {
     ]
   }
 }
-
-# Grants user code deployment the permissions to pull images from Artifact Registry
-resource "kubernetes_secret" "artifact_registry" {
-  metadata {
-    name = "artifact-registry"
-  }
-
-  data = {
-    ".dockerconfigjson" = jsonencode({
-      auths = {
-        "https://${var.registry.id}-docker.pkg.dev" = {
-          auth = "${base64encode("_json_key:${var.service_account_json}")}"
-        }
-      }
-    })
-  }
-
-  type = "kubernetes.io/dockerconfigjson"
-
-  depends_on = [google_container_cluster.default]
-}

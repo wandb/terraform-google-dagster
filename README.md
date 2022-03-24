@@ -87,6 +87,8 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 
 If you'd like to contribute to this repository you'll have a few dependencies you'll need to install before committing. We use `pre-commit` to ensure standards are adhered to by running Terraform validations via git hooks. We specifically use the following packages:
 
+- `conventional-pre-commit`: No additional dependencies needed for this
+- `terraform_validate`: No additional dependencies needed for this
 - `terraform_fmt`: No additional depenencies needed for this
 - `terraform_docs`: Installation instructions [here](https://github.com/terraform-docs/terraform-docs)
 - `terraform_tflint`: Installation instructions [here](https://github.com/terraform-linters/tflint)
