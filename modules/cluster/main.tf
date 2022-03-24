@@ -9,6 +9,10 @@ resource "google_container_cluster" "default" {
     services_ipv4_cidr_block = "/19"
   }
 
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
+
   release_channel {
     channel = "STABLE"
   }

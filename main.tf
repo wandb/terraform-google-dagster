@@ -58,6 +58,7 @@ module "networking" {
 module "cluster" {
   source                       = "./modules/cluster"
   namespace                    = var.namespace
+  project_id                   = var.project_id
   cluster_compute_machine_type = var.cluster_compute_machine_type
   cluster_node_count           = var.cluster_node_count
 

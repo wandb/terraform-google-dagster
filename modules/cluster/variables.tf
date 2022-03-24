@@ -3,6 +3,11 @@ variable "namespace" {
   type        = string
 }
 
+variable "project_id" {
+  description = "GCP project id used to enable a workload identity pool."
+  type        = string
+}
+
 variable "cluster_compute_machine_type" {
   description = "Compute machine type to deploy cluster nodes on."
   type        = string
