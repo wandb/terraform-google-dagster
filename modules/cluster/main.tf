@@ -9,6 +9,8 @@ resource "google_container_cluster" "default" {
     services_ipv4_cidr_block = "/19"
   }
 
+  # enable workload identiy pools for recommended permissioning practices
+  # read more about this here: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
@@ -47,5 +49,15 @@ resource "google_container_node_pool" "default" {
     ignore_changes = [
       location
     ]
+  }
+}
+
+resource "kubernetes_namespace" "default" {
+  metadata {
+    labels = {
+      "pod-security.kubernetes.io/enforce" = "baseline"
+    }
+
+    name = "default"
   }
 }
