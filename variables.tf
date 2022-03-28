@@ -47,15 +47,3 @@ variable "cloudsql_availability_type" {
   type        = string
   default     = "ZONAL"
 }
-
-variable "cluster_compute_machine_type" {
-  description = "Compute machine type to deploy cluster nodes on."
-  type        = string
-  default     = "e2-standard-2"
-}
-
-variable "cluster_node_count" {
-  description = "Number of nodes to create in cluster."
-  type        = number
-  default     = 2
-}

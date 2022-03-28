@@ -29,8 +29,6 @@ module "dagster_infra" {
   # cloudsql_postgres_version (default POSTGRES_14)
   # cloudsql_tier (default db-f1-micro)
   # cloudsql_availability_type (default ZONAL)
-  # cluster_compute_machine_type (default e2-standard-2)
-  # cluster_node_count (default 2)
   # deletion_protection (default true)
 }
 

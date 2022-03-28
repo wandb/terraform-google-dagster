@@ -56,17 +56,14 @@ module "networking" {
 }
 
 module "cluster" {
-  source                       = "./modules/cluster"
-  namespace                    = var.namespace
-  project_id                   = var.project_id
-  cluster_compute_machine_type = var.cluster_compute_machine_type
-  cluster_node_count           = var.cluster_node_count
+  source     = "./modules/cluster"
+  namespace  = var.namespace
+  project_id = var.project_id
 
-  network         = module.networking.network
-  subnetwork      = module.networking.subnetwork
-  service_account = module.service_account.service_account
+  network    = module.networking.network
+  subnetwork = module.networking.subnetwork
 
-  depends_on = [module.networking, module.service_account]
+  depends_on = [module.networking]
 }
 
 module "database" {

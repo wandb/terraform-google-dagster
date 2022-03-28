@@ -8,21 +8,6 @@ variable "project_id" {
   type        = string
 }
 
-variable "cluster_compute_machine_type" {
-  description = "Compute machine type to deploy cluster nodes on."
-  type        = string
-}
-
-variable "cluster_node_count" {
-  description = "Number of nodes to create in cluster."
-  type        = number
-}
-
-variable "service_account" {
-  description = "The service account associated with the GKE cluster instances that host Dagster."
-  type        = object({ email = string })
-}
-
 variable "network" {
   description = "Google Compute Engine network to which the cluster is connected."
   type        = object({ self_link = string })
