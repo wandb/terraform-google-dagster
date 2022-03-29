@@ -5,7 +5,9 @@
 </p>
 
 # terraform-google-dagster
-Terraform module to provision required GCP infrastructure necesarry for a Dagster Kubernetes-based deployment.
+Terraform module to provision required GCP infrastructure necessary for a Dagster Kubernetes-based deployment.
+
+**Note: this configuration does not bundle the Dagster application but rather all of its required services. A reference implementation may be found in the `example-app` directory.**
 
 ## Overview
 The `terraform-google-dagster` module does not attempt to make any assumptions about how your Dagster deployment should look as this can vary widely and will not actually create a Dagster deployment. It _will_ create all of the core foundational components necessary for running a Dagster cluster which should be easily pluggable into the [Dagster Helm chart](https://artifacthub.io/packages/helm/dagster/dagster) or your own Dagster Kubernetes resources.
