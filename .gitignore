@@ -32,3 +32,5 @@ override.tf.json
 *.tfvars
 
 .terraform.lock*
+
+*.dccache
