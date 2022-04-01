@@ -7,7 +7,7 @@ resource "random_pet" "suffix" {
 }
 
 resource "google_storage_bucket" "file_storage" {
-  name     = "${var.namespace}-storage"
+  name     = "${var.namespace}-storage-${random_pet.suffix}"
   location = var.cloud_storage_bucket_location
 
   uniform_bucket_level_access = true
