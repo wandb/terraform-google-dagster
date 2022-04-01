@@ -3,11 +3,11 @@ locals {
 }
 
 resource "random_pet" "suffix" {
-  length = 2
+  length = 1
 }
 
 resource "google_storage_bucket" "file_storage" {
-  name     = "${var.namespace}-storage-${random_pet.suffix}"
+  name     = "${var.namespace}-storage-${random_pet.suffix.id}"
   location = var.cloud_storage_bucket_location
 
   uniform_bucket_level_access = true
