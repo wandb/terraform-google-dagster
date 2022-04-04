@@ -105,7 +105,11 @@ pre-commit install --hook-type commit-msg  # installs the hook for commit messag
 pre-commit run -a  # this will run pre-commit across all files in the project to validate installation
 ```
 
-Now after creating git commits these commit hooks will execute and ensure your changes adhere to the project standards. In general, we've followed the guidelines for best-practices laid out in [Terraform Best Practices](https://www.terraform-best-practices.com/), it would be recommended to follow these guidelines when submitting any contributions of your own.
+Now after creating git commits these commit hooks will execute and ensure your
+changes adhere to the project standards. In general, we've followed the
+guidelines for best-practices laid out in [Terraform Best
+Practices](https://www.terraform-best-practices.com/), it would be recommended
+to follow these guidelines when submitting any contributions of your own.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
