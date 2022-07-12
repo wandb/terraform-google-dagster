@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.1](https://github.com/wandb/terraform-google-dagster/compare/v1.0.0...v1.0.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* Explicitly disable client certificate auth (deprecated by kubernetes) ([#6](https://github.com/wandb/terraform-google-dagster/issues/6)) ([8c57966](https://github.com/wandb/terraform-google-dagster/commit/8c579669e9b5963f22a41a09546d626d9b134e7d))
+
 ## 1.0.0 (2022-04-04)
 
 
