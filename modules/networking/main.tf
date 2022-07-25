@@ -18,6 +18,8 @@ resource "google_compute_subnetwork" "default" {
   project = var.project
   region  = var.region
 
+  # When enabled, VMs in this subnetwork without external IP addresses can access Google APIs 
+  # and services by using Private Google Access.
   private_ip_google_access = true
 
   depends_on = [google_compute_network.default]
