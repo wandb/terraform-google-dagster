@@ -36,7 +36,7 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.13.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.30.0 |
 
 ## Modules
 
