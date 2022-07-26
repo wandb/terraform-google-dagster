@@ -56,11 +56,15 @@ module "networking" {
 }
 
 module "cluster" {
-  source                       = "./modules/cluster"
-  namespace                    = var.namespace
-  project_id                   = var.project_id
-  cluster_compute_machine_type = var.cluster_compute_machine_type
-  cluster_node_count           = var.cluster_node_count
+  source                               = "./modules/cluster"
+  namespace                            = var.namespace
+  project_id                           = var.project_id
+  cluster_compute_machine_type         = var.cluster_compute_machine_type
+  cluster_node_count                   = var.cluster_node_count
+  cluster_gpu_node_pool_max_node_count = var.cluster_gpu_node_pool_max_node_count
+  cluster_gpu_node_pool_machine_type   = var.cluster_gpu_node_pool_machine_type
+  cluster_gpu_node_pool_gpu_type       = var.cluster_gpu_node_pool_gpu_type
+  cluster_gpu_node_pool_gpu_count      = var.cluster_gpu_node_pool_gpu_count
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork

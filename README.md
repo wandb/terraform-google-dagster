@@ -64,7 +64,11 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 | <a name="input_cloudsql_availability_type"></a> [cloudsql\_availability\_type](#input\_cloudsql\_availability\_type) | The availability type of the Cloud SQL instance. | `string` | `"ZONAL"` | no |
 | <a name="input_cloudsql_postgres_version"></a> [cloudsql\_postgres\_version](#input\_cloudsql\_postgres\_version) | The postgres version of the CloudSQL instance. | `string` | `"POSTGRES_14"` | no |
 | <a name="input_cloudsql_tier"></a> [cloudsql\_tier](#input\_cloudsql\_tier) | The machine type to use | `string` | `"db-f1-micro"` | no |
-| <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
+| <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster default nodes on. | `string` | `"e2-standard-2"` | no |
+| <a name="input_cluster_gpu_node_pool_gpu_count"></a> [cluster\_gpu\_node\_pool\_gpu\_count](#input\_cluster\_gpu\_node\_pool\_gpu\_count) | The number of the guest accelerator cards exposed to the instance. | `number` | `2` | no |
+| <a name="input_cluster_gpu_node_pool_gpu_type"></a> [cluster\_gpu\_node\_pool\_gpu\_type](#input\_cluster\_gpu\_node\_pool\_gpu\_type) | The accelerator type resource to expose to the instance. | `string` | `"nvidia-tesla-v100"` | no |
+| <a name="input_cluster_gpu_node_pool_machine_type"></a> [cluster\_gpu\_node\_pool\_machine\_type](#input\_cluster\_gpu\_node\_pool\_machine\_type) | Compute machine type to deploy cluster GPU nodes on. | `string` | `"a2-highgpu-1g"` | no |
+| <a name="input_cluster_gpu_node_pool_max_node_count"></a> [cluster\_gpu\_node\_pool\_max\_node\_count](#input\_cluster\_gpu\_node\_pool\_max\_node\_count) | Maximum number of nodes in the GPU NodePool. | `number` | `2` | no |
 | <a name="input_cluster_node_count"></a> [cluster\_node\_count](#input\_cluster\_node\_count) | Number of nodes to create in cluster. | `number` | `2` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |

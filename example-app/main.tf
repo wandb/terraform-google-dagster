@@ -31,6 +31,10 @@ module "dagster_infra" {
   # cloudsql_availability_type (default ZONAL)
   # cluster_compute_machine_type (default e2-standard-2)
   # cluster_node_count (default 2)
+  # cluster_gpu_node_pool_max_node_count (default 2)
+  # cluster_gpu_node_pool_machine_type (default a2-highgpu-1g)
+  # cluster_gpu_node_pool_gpu_type (default nvidia-tesla-v100)
+  # cluster_gpu_node_pool_gpu_count (default 2)
   # deletion_protection (default true)
 }
 

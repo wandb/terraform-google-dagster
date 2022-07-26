@@ -9,13 +9,33 @@ variable "project_id" {
 }
 
 variable "cluster_compute_machine_type" {
-  description = "Compute machine type to deploy cluster nodes on."
+  description = "Compute machine type to deploy cluster default nodes on."
   type        = string
 }
 
 variable "cluster_node_count" {
   description = "Number of nodes to create in cluster."
   type        = number
+}
+
+variable "cluster_gpu_node_pool_max_node_count" {
+  description = "Maximum number of nodes in the GPU NodePool."
+  type        = string
+}
+
+variable "cluster_gpu_node_pool_machine_type" {
+  description = "Compute machine type to deploy cluster GPU nodes on."
+  type        = string
+}
+
+variable "cluster_gpu_node_pool_gpu_type" {
+  description = "The accelerator type resource to expose to the instance."
+  type        = string
+}
+
+variable "cluster_gpu_node_pool_gpu_count" {
+  description = "The number of the guest accelerator cards exposed to the instance."
+  type        = string
 }
 
 variable "service_account" {

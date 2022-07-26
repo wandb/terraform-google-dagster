@@ -51,6 +51,48 @@ resource "google_container_node_pool" "default" {
       "https://www.googleapis.com/auth/sqlservice.admin",
     ]
   }
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+  lifecycle {
+    ignore_changes = [
+      location
+    ]
+  }
+}
+
+resource "google_container_node_pool" "gpu" {
+  name    = "gpu-node-pool"
+  cluster = google_container_cluster.default.id
+  autoscaling {
+    max_node_count = var.cluster_gpu_node_pool_max_node_count
+    min_node_count = 0
+  }
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
+  node_config {
+    machine_type    = var.cluster_gpu_node_pool_machine_type
+    service_account = var.service_account.email
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/bigtable.admin",
+      "https://www.googleapis.com/auth/bigtable.data",
+      "https://www.googleapis.com/auth/bigquery",
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/devstorage.read_write",
+      "https://www.googleapis.com/auth/logging.write",
+      "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/pubsub",
+      "https://www.googleapis.com/auth/trace.append",
+      "https://www.googleapis.com/auth/sqlservice.admin",
+    ]
+    guest_accelerator {
+      type  = var.cluster_gpu_node_pool_gpu_type
+      count = var.cluster_gpu_node_pool_gpu_count
+    }
+  }
 
   lifecycle {
     ignore_changes = [

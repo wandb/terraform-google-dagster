@@ -49,13 +49,37 @@ variable "cloudsql_availability_type" {
 }
 
 variable "cluster_compute_machine_type" {
-  description = "Compute machine type to deploy cluster nodes on."
+  description = "Compute machine type to deploy cluster default nodes on."
   type        = string
   default     = "e2-standard-2"
 }
 
 variable "cluster_node_count" {
   description = "Number of nodes to create in cluster."
+  type        = number
+  default     = 2
+}
+
+variable "cluster_gpu_node_pool_max_node_count" {
+  description = "Maximum number of nodes in the GPU NodePool."
+  type        = number
+  default     = 2
+}
+
+variable "cluster_gpu_node_pool_machine_type" {
+  description = "Compute machine type to deploy cluster GPU nodes on."
+  type        = string
+  default     = "a2-highgpu-1g"
+}
+
+variable "cluster_gpu_node_pool_gpu_type" {
+  description = "The accelerator type resource to expose to the instance."
+  type        = string
+  default     = "nvidia-tesla-v100"
+}
+
+variable "cluster_gpu_node_pool_gpu_count" {
+  description = "The number of the guest accelerator cards exposed to the instance."
   type        = number
   default     = 2
 }
