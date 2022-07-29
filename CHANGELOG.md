@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0](https://github.com/wandb/terraform-google-dagster/compare/v1.0.1...v1.1.0) (2022-07-29)
+
+
+### Features
+
+* Export cluster ID ([#9](https://github.com/wandb/terraform-google-dagster/issues/9)) ([a995e7a](https://github.com/wandb/terraform-google-dagster/commit/a995e7a6bf6e85e7ebbdf3fcf2c6fea18b1854eb))
+
 ### [1.0.1](https://github.com/wandb/terraform-google-dagster/compare/v1.0.0...v1.0.1) (2022-07-12)
 
 
