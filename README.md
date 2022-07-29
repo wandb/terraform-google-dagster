@@ -79,6 +79,7 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 | <a name="output_cloudsql_database"></a> [cloudsql\_database](#output\_cloudsql\_database) | Object containing connection parameters for provisioned CloudSQL database |
 | <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | Cluster certificate of provisioned Kubernetes cluster |
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint of provisioned Kubernetes cluster |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Id of provisioned Kubernetes cluster |
 | <a name="output_registry_image_path"></a> [registry\_image\_path](#output\_registry\_image\_path) | Docker image path of provisioned Artifact Registry |
 | <a name="output_registry_image_pull_secret"></a> [registry\_image\_pull\_secret](#output\_registry\_image\_pull\_secret) | Name of Kubernetes secret containing Docker config with permissions to pull from private Artifact Registry repository |
 | <a name="output_service_account"></a> [service\_account](#output\_service\_account) | Service account created to manage and authenticate services. |
