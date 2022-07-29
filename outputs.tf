@@ -8,6 +8,11 @@ output "cluster_endpoint" {
   value       = module.cluster.cluster_endpoint
 }
 
+output "cluster_id" {
+  description = "Id of provisioned Kubernetes cluster"
+  value       = module.cluster.cluster_id
+}
+
 output "cluster_ca_certificate" {
   description = "Cluster certificate of provisioned Kubernetes cluster"
   value       = module.cluster.cluster_ca_certificate

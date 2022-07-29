@@ -53,6 +53,8 @@ module "storage" {
 module "networking" {
   source    = "./modules/networking"
   namespace = var.namespace
+  project   = var.project_id
+  region    = var.region
 }
 
 module "cluster" {
