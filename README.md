@@ -1,9 +1,3 @@
-<p float="left" align="middle" style="margin-bottom: 20px">
-    <img width="100" src="https://www.datocms-assets.com/2885/1620155116-brandhcterraformverticalcolor.svg" style="margin-right: 25px">
-    <img width="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google-cloud-platform.svg/800px-Google-cloud-platform.svg.png" style="margin-right: 5px">
-    <img width="300" src="https://github.com/dagster-io/dagster/raw/master/assets/dagster-logo.png">
-</p>
-
 # terraform-google-dagster
 Terraform module to provision required GCP infrastructure necessary for a Dagster Kubernetes-based deployment.
 
