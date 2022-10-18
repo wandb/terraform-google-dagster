@@ -36,7 +36,7 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.30.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.13.0 |
 
 ## Modules
 
@@ -65,7 +65,7 @@ You can find an example deployment utilizing the official [Dagster Helm chart](h
 | <a name="input_cloudsql_postgres_version"></a> [cloudsql\_postgres\_version](#input\_cloudsql\_postgres\_version) | The postgres version of the CloudSQL instance. | `string` | `"POSTGRES_14"` | no |
 | <a name="input_cloudsql_tier"></a> [cloudsql\_tier](#input\_cloudsql\_tier) | The machine type to use | `string` | `"db-f1-micro"` | no |
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
-| <a name="input_cluster_node_count"></a> [cluster\_node\_count](#input\_cluster\_node\_count) | Number of nodes to create in cluster. | `number` | `2` | no |
+| <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |

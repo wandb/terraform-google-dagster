@@ -28,12 +28,27 @@ resource "google_container_cluster" "default" {
       issue_client_certificate = false
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      # We are relying on the release channel to maintain version upgrades
+      node_version
+    ]
+  }
 }
 
 resource "google_container_node_pool" "default" {
-  name       = "default-node-pool"
-  cluster    = google_container_cluster.default.id
-  node_count = var.cluster_node_count
+  name    = "default-node-pool"
+  cluster = google_container_cluster.default.id
+
+  autoscaling {
+    min_node_count = 1
+    max_node_count = var.cluster_node_pool_max_node_count
+  }
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
 
   node_config {
     machine_type    = var.cluster_compute_machine_type
@@ -54,7 +69,8 @@ resource "google_container_node_pool" "default" {
 
   lifecycle {
     ignore_changes = [
-      location
+      location,
+      version
     ]
   }
 }
