@@ -13,8 +13,8 @@ variable "cluster_compute_machine_type" {
   type        = string
 }
 
-variable "cluster_node_count" {
-  description = "Number of nodes to create in cluster."
+variable "cluster_node_pool_max_node_count" {
+  description = "Max number of nodes cluster can scale up to."
   type        = number
 }
 
