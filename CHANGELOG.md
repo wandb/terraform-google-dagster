@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/wandb/terraform-google-dagster/compare/v1.1.0...v2.0.0) (2022-10-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* Enable cluster auto-scaling, auto-repairs and auto-upgrades (#10)
+
+### Features
+
+* Enable cluster auto-scaling, auto-repairs and auto-upgrades ([#10](https://github.com/wandb/terraform-google-dagster/issues/10)) ([7b6f93e](https://github.com/wandb/terraform-google-dagster/commit/7b6f93e3ee690cabc1f789d7a1d5352ccccdda1f))
+
 ## [1.1.0](https://github.com/wandb/terraform-google-dagster/compare/v1.0.1...v1.1.0) (2022-07-29)
 
 
