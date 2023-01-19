@@ -1,3 +1,17 @@
+terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.30"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.4"
+    }
+  }
+}
+
 resource "random_string" "master_password" {
   length  = 32
   special = false
@@ -22,6 +36,11 @@ resource "google_sql_database_instance" "default" {
     ip_configuration {
       ipv4_enabled    = false
       private_network = var.network_connection.network
+    }
+
+    database_flags {
+      name  = "cloudsql.iam_authentication"
+      value = "on"
     }
 
     backup_configuration {
