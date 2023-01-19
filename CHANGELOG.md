@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0](https://github.com/wandb/terraform-google-dagster/compare/v2.0.0...v2.1.0) (2023-01-19)
+
+
+### Features
+
+* Enable Cloud SQL IAM authentication ([#11](https://github.com/wandb/terraform-google-dagster/issues/11)) ([8b08ebc](https://github.com/wandb/terraform-google-dagster/commit/8b08ebccf42bea6ab74f12c688c34f2698c80bd4))
+
 ## [2.0.0](https://github.com/wandb/terraform-google-dagster/compare/v1.1.0...v2.0.0) (2022-10-19)
 
 
