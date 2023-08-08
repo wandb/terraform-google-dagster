@@ -1,5 +1,11 @@
 terraform {
+  required_version = "=1.5.3"
+
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.9"
+    }
     google = {
       source  = "hashicorp/google"
       version = "~> 4.13"
@@ -22,7 +28,6 @@ module "dagster_infra" {
   source     = "../"
   project_id = var.project_id
   region     = var.region
-  zone       = var.zone
   namespace  = var.namespace
 
   # cloud_storage_bucket_location (default US)
@@ -35,6 +40,12 @@ module "dagster_infra" {
 }
 
 data "google_client_config" "current" {}
+
+provider "kubernetes" {
+  host                   = "https://${module.dagster_infra.cluster_endpoint}"
+  cluster_ca_certificate = base64decode(module.dagster_infra.cluster_ca_certificate)
+  token                  = data.google_client_config.current.access_token
+}
 
 provider "helm" {
   kubernetes {
