@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/wandb/terraform-google-dagster/compare/v2.1.0...v2.2.0) (2023-08-14)
+
+
+### Features
+
+* Migrate out of legacy module configuration ([#12](https://github.com/wandb/terraform-google-dagster/issues/12)) ([d4e256f](https://github.com/wandb/terraform-google-dagster/commit/d4e256f62027c5fd4be9ccc70be2373e7379c111))
+
 ## [2.1.0](https://github.com/wandb/terraform-google-dagster/compare/v2.0.0...v2.1.0) (2023-01-19)
 
 
