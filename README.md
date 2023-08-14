@@ -105,14 +105,11 @@ to follow these guidelines when submitting any contributions of your own.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.13 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.9 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0, < 2.0.0 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.13 |
+No providers.
 
 ## Modules
 
@@ -128,9 +125,7 @@ to follow these guidelines when submitting any contributions of your own.
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [google_client_config.current](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/client_config) | data source |
+No resources.
 
 ## Inputs
 
@@ -146,7 +141,6 @@ to follow these guidelines when submitting any contributions of your own.
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
-| <a name="input_zone"></a> [zone](#input\_zone) | Google zone | `string` | n/a | yes |
 
 ## Outputs
 
