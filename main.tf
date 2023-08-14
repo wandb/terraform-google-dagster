@@ -20,20 +20,6 @@ module "project_factory_project_services" {
   disable_services_on_destroy = false
 }
 
-# Required for Artifact Registry. Google provider does not have
-# support for this cloud resource.
-provider "google-beta" {
-  project = var.project_id
-  region  = var.region
-  zone    = var.zone
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
-  zone    = var.zone
-}
-
 module "service_account" {
   source    = "./modules/service_account"
   namespace = var.namespace
@@ -82,14 +68,6 @@ module "database" {
   network_connection = module.networking.connection
 
   depends_on = [module.networking]
-}
-
-data "google_client_config" "current" {}
-
-provider "kubernetes" {
-  host                   = "https://${module.cluster.cluster_endpoint}"
-  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-  token                  = data.google_client_config.current.access_token
 }
 
 module "registry" {

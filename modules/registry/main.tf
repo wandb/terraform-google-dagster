@@ -1,5 +1,19 @@
+terraform {
+  required_version = ">= 1.5.0, < 2.0.0"
+
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.30"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.9"
+    }
+  }
+}
+
 resource "google_artifact_registry_repository" "default" {
-  provider      = google-beta
   format        = "DOCKER"
   location      = var.location
   repository_id = "${var.namespace}-registry"
@@ -9,7 +23,6 @@ resource "google_artifact_registry_repository" "default" {
 # This service account will be used by the Kubernetes cluster when accessing
 # code deployment images in the private repository.
 resource "google_artifact_registry_repository_iam_member" "access" {
-  provider   = google-beta
   project    = google_artifact_registry_repository.default.project
   location   = google_artifact_registry_repository.default.location
   repository = google_artifact_registry_repository.default.name
@@ -30,7 +43,7 @@ resource "kubernetes_secret" "image_pull_secret" {
     ".dockerconfigjson" = jsonencode({
       auths = {
         "https://${google_artifact_registry_repository.default.id}-docker.pkg.dev" = {
-          auth = "${base64encode("_json_key:${var.service_account_credentials}")}"
+          auth = base64encode("_json_key:${var.service_account_credentials}")
         }
       }
     })

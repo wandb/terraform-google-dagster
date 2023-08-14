@@ -8,11 +8,6 @@ variable "region" {
   type        = string
 }
 
-variable "zone" {
-  description = "Google zone"
-  type        = string
-}
-
 variable "namespace" {
   description = "Namespace used as a prefix for all resources"
   type        = string
