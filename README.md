@@ -154,6 +154,8 @@ No resources.
 | <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Id of provisioned Kubernetes cluster |
 | <a name="output_registry_image_path"></a> [registry\_image\_path](#output\_registry\_image\_path) | Docker image path of provisioned Artifact Registry |
 | <a name="output_registry_image_pull_secret"></a> [registry\_image\_pull\_secret](#output\_registry\_image\_pull\_secret) | Name of Kubernetes secret containing Docker config with permissions to pull from private Artifact Registry repository |
+| <a name="output_registry_location"></a> [registry\_location](#output\_registry\_location) | Location of provisioned Artifact Registry |
+| <a name="output_registry_name"></a> [registry\_name](#output\_registry\_name) | Name of provisioned Artifact Registry |
 | <a name="output_service_account"></a> [service\_account](#output\_service\_account) | Service account created to manage and authenticate services. |
 | <a name="output_storage_bucket_name"></a> [storage\_bucket\_name](#output\_storage\_bucket\_name) | Name of provisioned Cloud Storage bucket |
 <!-- END_TF_DOCS -->
