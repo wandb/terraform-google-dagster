@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0](https://github.com/wandb/terraform-google-dagster/compare/v2.2.0...v2.3.0) (2023-08-18)
+
+
+### Features
+
+* Add two registry outputs ([#13](https://github.com/wandb/terraform-google-dagster/issues/13)) ([d01fcd8](https://github.com/wandb/terraform-google-dagster/commit/d01fcd8e034728b70ca8900c8e6fd99966460bf9))
+
 ## [2.2.0](https://github.com/wandb/terraform-google-dagster/compare/v2.1.0...v2.2.0) (2023-08-14)
 
 
