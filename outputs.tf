@@ -30,6 +30,16 @@ output "cloudsql_database" {
   sensitive   = true
 }
 
+output "registry_name" {
+  description = "Name of provisioned Artifact Registry"
+  value       = module.registry.registry_name
+}
+
+output "registry_location" {
+  description = "Location of provisioned Artifact Registry"
+  value       = module.registry.registry_location
+}
+
 output "registry_image_path" {
   description = "Docker image path of provisioned Artifact Registry"
   value       = module.registry.registry_image_path
