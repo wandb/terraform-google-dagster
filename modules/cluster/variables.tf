@@ -32,3 +32,8 @@ variable "subnetwork" {
   description = "Google Compute Engine subnetwork in which the cluster's instances are launched."
   type        = object({ self_link = string })
 }
+
+variable "domain" {
+  description = "The domain in which your Google Groups are defined."
+  type        = string
+}
