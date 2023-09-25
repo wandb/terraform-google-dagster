@@ -54,3 +54,8 @@ variable "cluster_node_pool_max_node_count" {
   type        = number
   default     = 2
 }
+
+variable "domain" {
+  description = "The domain in which your Google Groups are defined."
+  type        = string
+}

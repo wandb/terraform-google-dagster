@@ -1,3 +1,14 @@
+terraform {
+  required_version = ">= 1.5.0, < 2.0.0"
+
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.30"
+    }
+  }
+}
+
 resource "google_container_cluster" "default" {
   name            = "${var.namespace}-cluster"
   networking_mode = "VPC_NATIVE"
@@ -7,6 +18,10 @@ resource "google_container_cluster" "default" {
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "/14"
     services_ipv4_cidr_block = "/19"
+  }
+
+  authenticator_groups_config {
+    security_group = "gke-security-groups@${var.domain}.com"
   }
 
   workload_identity_config {

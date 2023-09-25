@@ -49,6 +49,7 @@ module "cluster" {
   project_id                       = var.project_id
   cluster_compute_machine_type     = var.cluster_compute_machine_type
   cluster_node_pool_max_node_count = var.cluster_node_pool_max_node_count
+  domain                           = var.domain
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork

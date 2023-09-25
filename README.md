@@ -56,6 +56,7 @@ No resources.
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
+| <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
@@ -140,6 +141,7 @@ No resources.
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
+| <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
