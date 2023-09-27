@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.4.1](https://github.com/wandb/terraform-google-dagster/compare/v2.4.0...v2.4.1) (2023-09-27)
+
+
+### Bug Fixes
+
+* Dagit has been renamed Dagster webserver ([#15](https://github.com/wandb/terraform-google-dagster/issues/15)) ([d56202c](https://github.com/wandb/terraform-google-dagster/commit/d56202cf8863c8a509cb23676dd657f09df4600f))
+
 ## [2.4.0](https://github.com/wandb/terraform-google-dagster/compare/v2.3.0...v2.4.0) (2023-09-25)
 
 
