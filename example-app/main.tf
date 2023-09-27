@@ -29,6 +29,7 @@ module "dagster_infra" {
   project_id = var.project_id
   region     = var.region
   namespace  = var.namespace
+  domain     = var.domain
 
   # cloud_storage_bucket_location (default US)
   # cloudsql_postgres_version (default POSTGRES_14)
@@ -77,7 +78,7 @@ locals {
     imagePullSecrets = local.imagePullSecrets
   }
   service_values = {
-    dagit = {
+    dagsterWebserver = {
       workspace = {
         enabled = true
         servers = [{

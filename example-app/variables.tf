@@ -35,3 +35,9 @@ variable "dagster_deployment_tag" {
   type        = string
   default     = "latest"
 }
+
+variable "domain" {
+  description = "The domain in which your Google Groups are defined."
+  type        = string
+  default     = "example"
+}
