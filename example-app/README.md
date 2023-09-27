@@ -62,6 +62,7 @@ terraform apply
 | <a name="input_dagster_deployment_image"></a> [dagster\_deployment\_image](#input\_dagster\_deployment\_image) | Image name of user code deployment | `string` | `"user-code-example"` | no |
 | <a name="input_dagster_deployment_tag"></a> [dagster\_deployment\_tag](#input\_dagster\_deployment\_tag) | User code deployment tag of Dagster to deploy | `string` | `"latest"` | no |
 | <a name="input_dagster_version"></a> [dagster\_version](#input\_dagster\_version) | Version of Dagster to deploy | `string` | `"0.14.3"` | no |
+| <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | `"example"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
