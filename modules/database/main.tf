@@ -35,7 +35,10 @@ resource "google_sql_database_instance" "default" {
     availability_type = var.cloudsql_availability_type
 
     ip_configuration {
-      ipv4_enabled    = false
+      # We're giving the Cloud SQL instance a public IP address in order to connect to it with
+      # Cloud SQL Proxy (which requires IAM authentication). We're not exposing the instance
+      # to the internet because no external network is authorized.
+      ipv4_enabled    = true
       private_network = var.network_connection.network
     }
 
