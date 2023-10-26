@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0](https://github.com/wandb/terraform-google-dagster/compare/v2.4.1...v2.5.0) (2023-10-26)
+
+
+### Features
+
+* Public IP address ([#16](https://github.com/wandb/terraform-google-dagster/issues/16)) ([2707f50](https://github.com/wandb/terraform-google-dagster/commit/2707f50a18ec5b5325aa12521c03f2f829150989))
+
 ### [2.4.1](https://github.com/wandb/terraform-google-dagster/compare/v2.4.0...v2.4.1) (2023-09-27)
 
 
