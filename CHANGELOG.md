@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0](https://github.com/wandb/terraform-google-dagster/compare/v2.5.0...v2.6.0) (2023-10-27)
+
+
+### Features
+
+* Add lifecycle policy to storage bucket ([#17](https://github.com/wandb/terraform-google-dagster/issues/17)) ([b1f9fb6](https://github.com/wandb/terraform-google-dagster/commit/b1f9fb66c298411dd8fda3da6ce2fcc15005cf9d))
+
 ## [2.5.0](https://github.com/wandb/terraform-google-dagster/compare/v2.4.1...v2.5.0) (2023-10-26)
 
 
