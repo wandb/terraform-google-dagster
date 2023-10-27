@@ -1,3 +1,18 @@
+terraform {
+  required_version = ">= 1.5.0, < 2.0.0"
+
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.30"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.4"
+    }
+  }
+}
+
 locals {
   member = "serviceAccount:${var.service_account.email}"
 }
@@ -17,6 +32,15 @@ resource "google_storage_bucket" "file_storage" {
     method          = ["GET", "HEAD", "PUT"]
     response_header = ["ETag"]
     max_age_seconds = 3000
+  }
+
+  lifecycle_rule {
+    condition {
+      age = 365
+    }
+    action {
+      type = "Delete"
+    }
   }
 }
 
