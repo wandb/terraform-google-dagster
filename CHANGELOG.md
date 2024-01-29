@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.7.0](https://github.com/wandb/terraform-google-dagster/compare/v2.6.0...v2.7.0) (2024-01-29)
+
+
+### Features
+
+* Increase CloudSQL active connections ([#19](https://github.com/wandb/terraform-google-dagster/issues/19)) ([a26c1b5](https://github.com/wandb/terraform-google-dagster/commit/a26c1b52abe1762fc340b5d86737bb84d18c1b92))
+
 ## [2.6.0](https://github.com/wandb/terraform-google-dagster/compare/v2.5.0...v2.6.0) (2023-10-27)
 
 
