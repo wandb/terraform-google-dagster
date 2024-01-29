@@ -47,6 +47,11 @@ resource "google_sql_database_instance" "default" {
       value = "on"
     }
 
+    database_flags {
+      name  = "max_connections"
+      value = "1000"
+    }
+
     backup_configuration {
       backup_retention_settings {
         retained_backups = 7
