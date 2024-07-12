@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.8.0](https://github.com/wandb/terraform-google-dagster/compare/v2.7.0...v2.8.0) (2024-07-12)
+
+
+### Features
+
+* Private GKE cluster ([#20](https://github.com/wandb/terraform-google-dagster/issues/20)) ([635ac51](https://github.com/wandb/terraform-google-dagster/commit/635ac512e0dbb9ddd189cc4baf1752a79accd4ee))
+
 ## [2.7.0](https://github.com/wandb/terraform-google-dagster/compare/v2.6.0...v2.7.0) (2024-01-29)
 
 
