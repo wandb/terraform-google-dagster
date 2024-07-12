@@ -49,3 +49,8 @@ output "registry_image_pull_secret" {
   description = "Name of Kubernetes secret containing Docker config with permissions to pull from private Artifact Registry repository"
   value       = module.registry.registry_image_pull_secret
 }
+
+output "network_name" {
+  description = "Name of provisioned VPC network"
+  value       = module.networking.network.name
+}

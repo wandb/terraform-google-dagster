@@ -82,6 +82,11 @@ resource "google_container_node_pool" "default" {
     ]
   }
 
+  network_config {
+    # Isolate nodes from the internet by default. Internet access is granted with NAT.
+    enable_private_nodes = true
+  }
+
   lifecycle {
     ignore_changes = [
       location,
