@@ -155,6 +155,7 @@ No resources.
 | <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | Cluster certificate of provisioned Kubernetes cluster |
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint of provisioned Kubernetes cluster |
 | <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Id of provisioned Kubernetes cluster |
+| <a name="output_network_name"></a> [network\_name](#output\_network\_name) | Name of provisioned VPC network |
 | <a name="output_registry_image_path"></a> [registry\_image\_path](#output\_registry\_image\_path) | Docker image path of provisioned Artifact Registry |
 | <a name="output_registry_image_pull_secret"></a> [registry\_image\_pull\_secret](#output\_registry\_image\_pull\_secret) | Name of Kubernetes secret containing Docker config with permissions to pull from private Artifact Registry repository |
 | <a name="output_registry_location"></a> [registry\_location](#output\_registry\_location) | Location of provisioned Artifact Registry |
