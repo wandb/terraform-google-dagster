@@ -69,7 +69,11 @@ resource "google_sql_database_instance" "default" {
     disk_size             = 100
     disk_type             = "PD_SSD"
 
+    insights_config {
+      query_insights_enabled = false
+    }
   }
+
 }
 
 resource "google_sql_database" "default" {
