@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.9.0](https://github.com/wandb/terraform-google-dagster/compare/v2.8.0...v2.9.0) (2024-08-08)
+
+
+### Features
+
+* Explicitly disable query insights ([#21](https://github.com/wandb/terraform-google-dagster/issues/21)) ([443a9ff](https://github.com/wandb/terraform-google-dagster/commit/443a9ff1365b4aeeec0ae1b4ac21fd82770fbdd7))
+
 ## [2.8.0](https://github.com/wandb/terraform-google-dagster/compare/v2.7.0...v2.8.0) (2024-07-12)
 
 
