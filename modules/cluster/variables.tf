@@ -18,6 +18,12 @@ variable "cluster_node_pool_max_node_count" {
   type        = number
 }
 
+variable "cluster_monitoring_components" {
+  description = "Components to enable in the GKE monitoring stack."
+  type        = list(string)
+  default     = []
+}
+
 variable "service_account" {
   description = "The service account associated with the GKE cluster instances that host Dagster."
   type        = object({ email = string })

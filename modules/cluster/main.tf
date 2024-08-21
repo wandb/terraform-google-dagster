@@ -32,6 +32,10 @@ resource "google_container_cluster" "default" {
     channel = "STABLE"
   }
 
+  monitoring_config {
+    enable_components = var.cluster_monitoring_components
+  }
+
   remove_default_node_pool = true
   initial_node_count       = 1
 
@@ -68,18 +72,6 @@ resource "google_container_node_pool" "default" {
   node_config {
     machine_type    = var.cluster_compute_machine_type
     service_account = var.service_account.email
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/bigtable.admin",
-      "https://www.googleapis.com/auth/bigtable.data",
-      "https://www.googleapis.com/auth/bigquery",
-      "https://www.googleapis.com/auth/cloud-platform",
-      "https://www.googleapis.com/auth/devstorage.read_write",
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-      "https://www.googleapis.com/auth/pubsub",
-      "https://www.googleapis.com/auth/trace.append",
-      "https://www.googleapis.com/auth/sqlservice.admin",
-    ]
   }
 
   network_config {
