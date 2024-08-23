@@ -55,6 +55,12 @@ variable "cluster_node_pool_max_node_count" {
   default     = 2
 }
 
+variable "cluster_monitoring_components" {
+  description = "Components to enable in the GKE monitoring stack."
+  type        = list(string)
+  default     = ["SYSTEM_COMPONENTS"]
+}
+
 variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string

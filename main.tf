@@ -21,8 +21,9 @@ module "project_factory_project_services" {
 }
 
 module "service_account" {
-  source    = "./modules/service_account"
-  namespace = var.namespace
+  source     = "./modules/service_account"
+  project_id = var.project_id
+  namespace  = var.namespace
 }
 
 module "storage" {
@@ -50,6 +51,7 @@ module "cluster" {
   cluster_compute_machine_type     = var.cluster_compute_machine_type
   cluster_node_pool_max_node_count = var.cluster_node_pool_max_node_count
   domain                           = var.domain
+  cluster_monitoring_components    = var.cluster_monitoring_components
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork
