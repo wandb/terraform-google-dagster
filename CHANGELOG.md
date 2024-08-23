@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.10.0](https://github.com/wandb/terraform-google-dagster/compare/v2.9.0...v2.10.0) (2024-08-23)
+
+
+### Features
+
+* Collect GKE metrics ([#22](https://github.com/wandb/terraform-google-dagster/issues/22)) ([d23d44d](https://github.com/wandb/terraform-google-dagster/commit/d23d44d9da68e1afbc7b096e9c4e91b39bdb8aca))
+
 ## [2.9.0](https://github.com/wandb/terraform-google-dagster/compare/v2.8.0...v2.9.0) (2024-08-08)
 
 
