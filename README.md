@@ -36,7 +36,7 @@ No providers.
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./modules/cluster | n/a |
 | <a name="module_database"></a> [database](#module\_database) | ./modules/database | n/a |
 | <a name="module_networking"></a> [networking](#module\_networking) | ./modules/networking | n/a |
-| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 11.3 |
+| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.0 |
 | <a name="module_registry"></a> [registry](#module\_registry) | ./modules/registry | n/a |
 | <a name="module_service_account"></a> [service\_account](#module\_service\_account) | ./modules/service_account | n/a |
 | <a name="module_storage"></a> [storage](#module\_storage) | ./modules/storage | n/a |
@@ -54,7 +54,7 @@ No resources.
 | <a name="input_cloudsql_postgres_version"></a> [cloudsql\_postgres\_version](#input\_cloudsql\_postgres\_version) | The postgres version of the CloudSQL instance. | `string` | `"POSTGRES_14"` | no |
 | <a name="input_cloudsql_tier"></a> [cloudsql\_tier](#input\_cloudsql\_tier) | The machine type to use | `string` | `"db-f1-micro"` | no |
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
-| <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br>  "SYSTEM_COMPONENTS"<br>]</pre> | no |
+| <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |

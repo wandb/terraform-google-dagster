@@ -4,7 +4,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 4.30"
+      version = "~> 6.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -17,6 +17,14 @@ resource "google_artifact_registry_repository" "default" {
   format        = "DOCKER"
   location      = var.location
   repository_id = "${var.namespace}-registry"
+
+  cleanup_policies {
+    id     = "delete-old-images"
+    action = "DELETE"
+    condition {
+      older_than = "365d"
+    }
+  }
 }
 
 # Grants pull access for the registry to the project's service account
