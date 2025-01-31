@@ -1,7 +1,7 @@
 # Ensures APIs are all enabled in project
 module "project_factory_project_services" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
-  version = "~> 11.3"
+  version = "~> 18.0"
 
   project_id = null
 
