@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.11.0](https://github.com/wandb/terraform-google-dagster/compare/v2.10.0...v2.11.0) (2025-01-31)
+
+
+### Features
+
+* Add cleanup policy on the Artifact Registry ([#23](https://github.com/wandb/terraform-google-dagster/issues/23)) ([dd0ed6d](https://github.com/wandb/terraform-google-dagster/commit/dd0ed6d0df81d000f9a720f5aa1bd091f63ca092))
+
 ## [2.10.0](https://github.com/wandb/terraform-google-dagster/compare/v2.9.0...v2.10.0) (2024-08-23)
 
 
