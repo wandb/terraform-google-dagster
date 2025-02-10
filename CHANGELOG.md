@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.11.1](https://github.com/wandb/terraform-google-dagster/compare/v2.11.0...v2.11.1) (2025-02-10)
+
+
+### Bug Fixes
+
+* CloudSQL auto-resizing ([#24](https://github.com/wandb/terraform-google-dagster/issues/24)) ([c6be161](https://github.com/wandb/terraform-google-dagster/commit/c6be1610ae4c0697a3009f678248c14cf8485593))
+
 ## [2.11.0](https://github.com/wandb/terraform-google-dagster/compare/v2.10.0...v2.11.0) (2025-01-31)
 
 
