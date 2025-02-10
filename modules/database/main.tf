@@ -66,7 +66,7 @@ resource "google_sql_database_instance" "default" {
 
     disk_autoresize       = true
     disk_autoresize_limit = 0
-    disk_size             = 100
+    disk_size             = 120
     disk_type             = "PD_SSD"
 
     insights_config {
@@ -74,6 +74,11 @@ resource "google_sql_database_instance" "default" {
     }
   }
 
+  lifecycle {
+    # Prevents Terraform from deleting the disk and recreating it when the size changes due to
+    # auto-resizing.
+    ignore_changes = [settings[0].disk_size]
+  }
 }
 
 resource "google_sql_database" "default" {
