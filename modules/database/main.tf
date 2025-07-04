@@ -30,9 +30,11 @@ resource "google_sql_database_instance" "default" {
   deletion_protection = var.deletion_protection
 
   settings {
-    tier              = var.cloudsql_tier
-    activation_policy = "ALWAYS"
-    availability_type = var.cloudsql_availability_type
+    tier                        = var.cloudsql_tier
+    edition                     = var.cloudsql_edition
+    activation_policy           = "ALWAYS"
+    availability_type           = var.cloudsql_availability_type
+    deletion_protection_enabled = var.deletion_protection
 
     ip_configuration {
       # We're giving the Cloud SQL instance a public IP address in order to connect to it with
@@ -40,6 +42,7 @@ resource "google_sql_database_instance" "default" {
       # to the internet because no external network is authorized.
       ipv4_enabled    = true
       private_network = var.network_connection.network
+      ssl_mode        = "ENCRYPTED_ONLY"
     }
 
     database_flags {
@@ -70,7 +73,7 @@ resource "google_sql_database_instance" "default" {
     disk_type             = "PD_SSD"
 
     insights_config {
-      query_insights_enabled = false
+      query_insights_enabled = var.cloudsql_query_insights_enabled
     }
   }
 

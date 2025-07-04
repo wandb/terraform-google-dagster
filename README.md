@@ -51,7 +51,9 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_storage_bucket_location"></a> [cloud\_storage\_bucket\_location](#input\_cloud\_storage\_bucket\_location) | Location to create cloud storage bucket in. | `string` | `"US"` | no |
 | <a name="input_cloudsql_availability_type"></a> [cloudsql\_availability\_type](#input\_cloudsql\_availability\_type) | The availability type of the Cloud SQL instance. | `string` | `"ZONAL"` | no |
+| <a name="input_cloudsql_edition"></a> [cloudsql\_edition](#input\_cloudsql\_edition) | The edition of the CloudSQL instance. | `string` | `"ENTERPRISE"` | no |
 | <a name="input_cloudsql_postgres_version"></a> [cloudsql\_postgres\_version](#input\_cloudsql\_postgres\_version) | The postgres version of the CloudSQL instance. | `string` | `"POSTGRES_14"` | no |
+| <a name="input_cloudsql_query_insights_enabled"></a> [cloudsql\_query\_insights\_enabled](#input\_cloudsql\_query\_insights\_enabled) | Whether to enable query insights. | `bool` | `false` | no |
 | <a name="input_cloudsql_tier"></a> [cloudsql\_tier](#input\_cloudsql\_tier) | The machine type to use | `string` | `"db-f1-micro"` | no |
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
 | <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
