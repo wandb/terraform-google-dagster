@@ -43,3 +43,24 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "enable_private_cluster" {
+  description = "Enable private cluster configuration"
+  type        = bool
+  default     = false
+}
+
+variable "master_ipv4_cidr_block" {
+  description = "The IP range in CIDR notation to use for the hosted master network. If null, GKE will auto-assign."
+  type        = string
+  default     = null
+}
+
+variable "authorized_networks" {
+  description = "List of authorized networks for accessing the master endpoint"
+  type = list(object({
+    cidr_block   = string
+    display_name = string
+  }))
+  default = []
+}

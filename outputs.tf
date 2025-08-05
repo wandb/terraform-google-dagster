@@ -52,5 +52,5 @@ output "registry_image_pull_secret" {
 
 output "network_name" {
   description = "Name of provisioned VPC network"
-  value       = module.networking.network.name
+  value       = coalesce(try(module.custom_networking[0].network.name, null), try(module.networking[0].network.name, null))
 }

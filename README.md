@@ -8,11 +8,47 @@ The `terraform-google-dagster` module does not attempt to make any assumptions a
 
 The module will provision:
 - **Service account**: This will manage all of the resources associated with your application
-- **Private network**: Private network from which your resources connect to one another (specifically Kubernetes and Postgres)
+- **Private network** [unless custom network specified]: Private network from which your resources connect to one another (specifically Kubernetes and Postgres)
 - **CloudSQL Postgres Instance**: A Cloud SQL Postgres instance
 - **Kubernetes Cluster**: Primary cluster from which you can run dagit, the dagster-daemon and user code deployments
 - **Cloud Storage Bucket**: Can be used as an IOManager, for log storage, asset materializations, or as a staging layer for data
 - **Artifact Registry Docker Repository**: This can be used for for private code deployment images
+
+## Custom Networking
+
+This module supports custom networking configurations that enable zero-trust architectures:
+
+- **Shared VPC Integration**: Use existing network infrastructure with `custom_networking` configuration
+- **Private GKE Clusters**: Deploy clusters with no public node IPs and configurable master access
+- **Network Security**: Configurable authorized networks and master CIDR blocks
+
+### Example: Shared VPC Configuration
+
+```hcl
+module "dagster" {
+  source = "github.com/your-org/terraform-google-dagster"
+
+  project_id = "your-gcp-project-id"
+  region     = "us-central1"
+  namespace  = "my-dagster"
+  domain     = "example.com"
+
+  custom_networking = {
+    network_self_link      = "projects/host-project/global/networks/shared-vpc"
+    subnetwork_self_link   = "projects/host-project/regions/us-central1/subnetworks/shared-subnet"
+    enable_private_cluster = true
+    master_ipv4_cidr_block = "172.16.0.0/28"
+    authorized_networks = [
+      {
+        cidr_block   = "10.0.0.0/8"
+        display_name = "Corporate Network"
+      }
+    ]
+  }
+}
+```
+
+With this foundation, you can implement zero-trust features like IAP for web access, IAP TCP tunneling for kubectl access, or other secure connectivity patterns. See the `example-app/` directory for a complete implementation.
 
 # Example
 
@@ -34,6 +70,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./modules/cluster | n/a |
+| <a name="module_custom_networking"></a> [custom\_networking](#module\_custom\_networking) | ./modules/custom-networking | n/a |
 | <a name="module_database"></a> [database](#module\_database) | ./modules/database | n/a |
 | <a name="module_networking"></a> [networking](#module\_networking) | ./modules/networking | n/a |
 | <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.0 |
@@ -56,6 +93,7 @@ No resources.
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
 | <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
+| <a name="input_custom_networking"></a> [custom\_networking](#input\_custom\_networking) | Custom networking configuration for shared VPC scenarios | <pre>object({<br/>    network_self_link      = optional(string)<br/>    subnetwork_self_link   = optional(string)<br/>    enable_private_cluster = optional(bool, false)<br/>    master_ipv4_cidr_block = optional(string)<br/>    authorized_networks = optional(list(object({<br/>      cidr_block   = string<br/>      display_name = string<br/>    })), [])<br/>  })</pre> | `{}` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |

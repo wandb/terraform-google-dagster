@@ -65,3 +65,18 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "custom_networking" {
+  description = "Custom networking configuration for shared VPC scenarios"
+  type = object({
+    network_self_link      = optional(string)
+    subnetwork_self_link   = optional(string)
+    enable_private_cluster = optional(bool, false)
+    master_ipv4_cidr_block = optional(string)
+    authorized_networks = optional(list(object({
+      cidr_block   = string
+      display_name = string
+    })), [])
+  })
+  default = {}
+}

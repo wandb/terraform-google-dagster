@@ -39,6 +39,30 @@ resource "google_container_cluster" "default" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
+  # Private cluster configuration
+  dynamic "private_cluster_config" {
+    for_each = var.enable_private_cluster ? [1] : []
+    content {
+      enable_private_nodes    = true
+      enable_private_endpoint = false
+      master_ipv4_cidr_block  = var.master_ipv4_cidr_block
+    }
+  }
+
+  # Master authorized networks
+  dynamic "master_authorized_networks_config" {
+    for_each = length(var.authorized_networks) > 0 ? [1] : []
+    content {
+      dynamic "cidr_blocks" {
+        for_each = var.authorized_networks
+        content {
+          cidr_block   = cidr_blocks.value.cidr_block
+          display_name = cidr_blocks.value.display_name
+        }
+      }
+    }
+  }
+
   # Disable client certificate authentication, which reduces the attack surface
   # for the cluster by disabling this deprecated feature. It defaults to false,
   # but this will make it explicit and quiet some security tooling.

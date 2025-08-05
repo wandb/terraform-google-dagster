@@ -41,3 +41,43 @@ variable "domain" {
   type        = string
   default     = "example"
 }
+
+variable "custom_networking" {
+  description = "Custom networking configuration for shared VPC scenarios"
+  type = object({
+    network_self_link      = optional(string)
+    subnetwork_self_link   = optional(string)
+    enable_private_cluster = optional(bool, false)
+    master_ipv4_cidr_block = optional(string)
+    authorized_networks = optional(list(object({
+      cidr_block   = string
+      display_name = string
+    })), [])
+  })
+  default = {}
+}
+
+variable "oauth_client_id" {
+  description = "OAuth 2.0 client ID for IAP (required if enable_iap_example is true)"
+  type        = string
+  default     = null
+}
+
+variable "oauth_client_secret" {
+  description = "OAuth 2.0 client secret for IAP (required if enable_iap_example is true)"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
+variable "iap_allowed_domains" {
+  description = "Domains allowed to access through IAP"
+  type        = list(string)
+  default     = []
+}
+
+variable "iap_allowed_users" {
+  description = "Users allowed to access through IAP"
+  type        = list(string)
+  default     = []
+}

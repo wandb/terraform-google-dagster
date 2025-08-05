@@ -31,6 +31,9 @@ module "dagster_infra" {
   namespace  = var.namespace
   domain     = var.domain
 
+  # Custom networking configuration
+  custom_networking = var.custom_networking
+
   # cloud_storage_bucket_location (default US)
   # cloudsql_postgres_version (default POSTGRES_14)
   # cloudsql_tier (default db-f1-micro)
@@ -127,4 +130,106 @@ resource "helm_release" "dagster_service" {
   values = [yamlencode(local.service_values)]
 
   depends_on = [module.dagster_infra]
+}
+
+# Optional IAP resources for zero-trust example
+resource "google_compute_global_address" "dagster_ip" {
+  name = "${var.namespace}-dagster-ip"
+}
+
+resource "google_iap_web_iam_binding" "dagster_iap_binding" {
+  members = concat(
+    [for domain in var.iap_allowed_domains : "domain:${domain}"],
+    [for user in var.iap_allowed_users : "user:${user}"]
+  )
+  role = "roles/iap.httpsResourceAccessor"
+}
+
+resource "kubernetes_secret" "iap_oauth_secret" {
+  metadata {
+    name      = "${var.namespace}-iap-oauth-secret"
+    namespace = "default"
+  }
+
+  data = {
+    client_id     = var.oauth_client_id
+    client_secret = var.oauth_client_secret
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_manifest" "dagster_backend_config" {
+  manifest = {
+    apiVersion = "cloud.google.com/v1"
+    kind       = "BackendConfig"
+    metadata = {
+      name      = "${var.namespace}-dagster-backend-config"
+      namespace = "default"
+    }
+    spec = {
+      iap = {
+        enabled = true
+        oauthclientCredentials = {
+          secretName = kubernetes_secret.iap_oauth_secret[0].metadata[0].name
+        }
+      }
+      healthCheck = {
+        checkIntervalSec   = 10
+        timeoutSec         = 5
+        healthyThreshold   = 1
+        unhealthyThreshold = 3
+        type               = "HTTP"
+        requestPath        = "/server_info"
+        port               = 3000
+      }
+    }
+  }
+}
+
+resource "google_compute_managed_ssl_certificate" "dagster_ssl_cert" {
+  name = "${var.namespace}-dagster-ssl-cert"
+
+  managed {
+    domains = [var.domain]
+  }
+}
+
+resource "kubernetes_ingress_v1" "dagster_ingress" {
+  metadata {
+    name      = "${var.namespace}-dagster-ingress"
+    namespace = "default"
+    annotations = {
+      "kubernetes.io/ingress.global-static-ip-name" = google_compute_global_address.dagster_ip[0].name
+      "networking.gke.io/managed-certificates"      = google_compute_managed_ssl_certificate.dagster_ssl_cert[0].name
+      "kubernetes.io/ingress.class"                 = "gce"
+      "cloud.google.com/backend-config"             = "{\"default\":\"${kubernetes_manifest.dagster_backend_config[0].manifest.metadata.name}\"}"
+    }
+  }
+
+  spec {
+    rule {
+      host = var.domain
+      http {
+        path {
+          path      = "/*"
+          path_type = "ImplementationSpecific"
+          backend {
+            service {
+              name = "dagster-service-dagster-webserver"
+              port {
+                number = 3000
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [
+    kubernetes_manifest.dagster_backend_config,
+    google_compute_managed_ssl_certificate.dagster_ssl_cert,
+    helm_release.dagster_service
+  ]
 }

@@ -37,11 +37,39 @@ module "storage" {
   depends_on = [module.service_account]
 }
 
+locals {
+  use_custom_networking = var.custom_networking.network_self_link != null && var.custom_networking.subnetwork_self_link != null
+
+  enable_private_cluster = coalesce(
+    var.custom_networking.enable_private_cluster,
+    false
+  )
+
+  master_ipv4_cidr_block = var.custom_networking.master_ipv4_cidr_block
+
+  authorized_networks = length(var.custom_networking.authorized_networks) > 0 ? var.custom_networking.authorized_networks : []
+}
+
+# Create networking only if not using custom networking
 module "networking" {
+  count = local.use_custom_networking ? 0 : 1
+
   source    = "./modules/networking"
   namespace = var.namespace
   project   = var.project_id
   region    = var.region
+}
+
+module "custom_networking" {
+  count = local.use_custom_networking ? 1 : 0
+
+  source     = "./modules/custom-networking"
+  namespace  = var.namespace
+  project_id = var.project_id
+  region     = var.region
+
+  network_self_link    = var.custom_networking.network_self_link
+  subnetwork_self_link = var.custom_networking.subnetwork_self_link
 }
 
 module "cluster" {
@@ -53,8 +81,13 @@ module "cluster" {
   domain                           = var.domain
   cluster_monitoring_components    = var.cluster_monitoring_components
 
-  network         = module.networking.network
-  subnetwork      = module.networking.subnetwork
+  network    = coalesce(try(module.custom_networking[0].network, null), module.networking[0].network)
+  subnetwork = coalesce(try(module.custom_networking[0].subnetwork, null), module.networking[0].subnetwork)
+
+  enable_private_cluster = local.enable_private_cluster
+  master_ipv4_cidr_block = local.master_ipv4_cidr_block
+  authorized_networks    = local.authorized_networks
+
   service_account = module.service_account.service_account
 
   depends_on = [module.networking, module.service_account]
@@ -68,9 +101,12 @@ module "database" {
   cloudsql_tier              = var.cloudsql_tier
   cloudsql_availability_type = var.cloudsql_availability_type
 
-  network_connection = module.networking.connection
+  network_connection = coalesce(
+    try(module.custom_networking[0].connection, null),
+    module.networking[0].connection
+  )
 
-  depends_on = [module.networking]
+  depends_on = [module.networking, module.custom_networking]
 }
 
 module "registry" {
