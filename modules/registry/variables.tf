@@ -3,6 +3,11 @@ variable "namespace" {
   type        = string
 }
 
+variable "project_id" {
+  description = "Project ID"
+  type        = string
+}
+
 variable "location" {
   description = "The location to host Artifact registry repository in."
   type        = string

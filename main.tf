@@ -29,6 +29,7 @@ module "service_account" {
 module "storage" {
   source                        = "./modules/storage"
   namespace                     = var.namespace
+  project_id                    = var.project_id
   deletion_protection           = var.deletion_protection
   cloud_storage_bucket_location = var.cloud_storage_bucket_location
 
@@ -38,21 +39,17 @@ module "storage" {
 }
 
 locals {
-  use_custom_networking = var.custom_networking.network_self_link != null && var.custom_networking.subnetwork_self_link != null
-
   enable_private_cluster = coalesce(
     var.custom_networking.enable_private_cluster,
     false
   )
-
   master_ipv4_cidr_block = var.custom_networking.master_ipv4_cidr_block
-
-  authorized_networks = length(var.custom_networking.authorized_networks) > 0 ? var.custom_networking.authorized_networks : []
+  authorized_networks    = length(var.custom_networking.authorized_networks) > 0 ? var.custom_networking.authorized_networks : []
 }
 
 # Create networking only if not using custom networking
 module "networking" {
-  count = local.use_custom_networking ? 0 : 1
+  count = var.enable_custom_networking ? 0 : 1
 
   source    = "./modules/networking"
   namespace = var.namespace
@@ -61,7 +58,7 @@ module "networking" {
 }
 
 module "custom_networking" {
-  count = local.use_custom_networking ? 1 : 0
+  count = var.enable_custom_networking ? 1 : 0
 
   source     = "./modules/custom-networking"
   namespace  = var.namespace
@@ -76,17 +73,20 @@ module "cluster" {
   source                           = "./modules/cluster"
   namespace                        = var.namespace
   project_id                       = var.project_id
+  region                           = var.region
   cluster_compute_machine_type     = var.cluster_compute_machine_type
   cluster_node_pool_max_node_count = var.cluster_node_pool_max_node_count
   domain                           = var.domain
   cluster_monitoring_components    = var.cluster_monitoring_components
 
-  network    = coalesce(try(module.custom_networking[0].network, null), module.networking[0].network)
-  subnetwork = coalesce(try(module.custom_networking[0].subnetwork, null), module.networking[0].subnetwork)
+  network    = coalesce(try(module.custom_networking[0].network, null), try(module.networking[0].network, null))
+  subnetwork = coalesce(try(module.custom_networking[0].subnetwork, null), try(module.networking[0].subnetwork, null))
 
-  enable_private_cluster = local.enable_private_cluster
-  master_ipv4_cidr_block = local.master_ipv4_cidr_block
-  authorized_networks    = local.authorized_networks
+  enable_private_cluster        = local.enable_private_cluster
+  master_ipv4_cidr_block        = local.master_ipv4_cidr_block
+  authorized_networks           = local.authorized_networks
+  cluster_secondary_range_name  = var.custom_networking.cluster_secondary_range_name
+  services_secondary_range_name = var.custom_networking.services_secondary_range_name
 
   service_account = module.service_account.service_account
 
@@ -96,6 +96,8 @@ module "cluster" {
 module "database" {
   source                     = "./modules/database"
   namespace                  = var.namespace
+  project_id                 = var.project_id
+  region                     = var.region
   deletion_protection        = var.deletion_protection
   cloudsql_postgres_version  = var.cloudsql_postgres_version
   cloudsql_tier              = var.cloudsql_tier
@@ -103,16 +105,17 @@ module "database" {
 
   network_connection = coalesce(
     try(module.custom_networking[0].connection, null),
-    module.networking[0].connection
+    try(module.networking[0].connection, null)
   )
 
   depends_on = [module.networking, module.custom_networking]
 }
 
 module "registry" {
-  source    = "./modules/registry"
-  namespace = var.namespace
-  location  = var.region
+  source     = "./modules/registry"
+  namespace  = var.namespace
+  project_id = var.project_id
+  location   = var.region
 
   service_account             = module.service_account.service_account
   service_account_credentials = module.service_account.service_account_credentials

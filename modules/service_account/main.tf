@@ -25,6 +25,7 @@ resource "google_service_account" "default" {
   account_id   = substr(random_id.default.dec, 0, 30)
   display_name = "GKE node pool Service Account"
   description  = "Used by GKE node pools in ${var.namespace}."
+  project      = var.project_id
 }
 
 resource "google_service_account_key" "default" {

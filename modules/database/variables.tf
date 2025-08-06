@@ -3,6 +3,16 @@ variable "namespace" {
   description = "The namespace name used as a prefix for all resources created."
 }
 
+variable "project_id" {
+  description = "Project ID"
+  type        = string
+}
+
+variable "region" {
+  description = "Google region"
+  type        = string
+}
+
 variable "network_connection" {
   description = "The private service networking connection that will connect database to the network."
   type        = object({ network = string })

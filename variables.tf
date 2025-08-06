@@ -66,13 +66,21 @@ variable "domain" {
   type        = string
 }
 
+variable "enable_custom_networking" {
+  description = "Enable custom networking using existing VPC and subnet"
+  type        = bool
+  default     = false
+}
+
 variable "custom_networking" {
-  description = "Custom networking configuration for shared VPC scenarios"
+  description = "Custom networking configuration for shared VPC scenarios (required when enable_custom_networking is true)"
   type = object({
-    network_self_link      = optional(string)
-    subnetwork_self_link   = optional(string)
-    enable_private_cluster = optional(bool, false)
-    master_ipv4_cidr_block = optional(string)
+    network_self_link             = optional(string)
+    subnetwork_self_link          = optional(string)
+    enable_private_cluster        = optional(bool, false)
+    master_ipv4_cidr_block        = optional(string)
+    cluster_secondary_range_name  = optional(string)
+    services_secondary_range_name = optional(string)
     authorized_networks = optional(list(object({
       cidr_block   = string
       display_name = string

@@ -33,6 +33,7 @@ module "dagster" {
   namespace  = "my-dagster"
   domain     = "example.com"
 
+  enable_custom_networking = true
   custom_networking = {
     network_self_link      = "projects/host-project/global/networks/shared-vpc"
     subnetwork_self_link   = "projects/host-project/regions/us-central1/subnetworks/shared-subnet"
@@ -93,9 +94,10 @@ No resources.
 | <a name="input_cluster_compute_machine_type"></a> [cluster\_compute\_machine\_type](#input\_cluster\_compute\_machine\_type) | Compute machine type to deploy cluster nodes on. | `string` | `"e2-standard-2"` | no |
 | <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
-| <a name="input_custom_networking"></a> [custom\_networking](#input\_custom\_networking) | Custom networking configuration for shared VPC scenarios | <pre>object({<br/>    network_self_link      = optional(string)<br/>    subnetwork_self_link   = optional(string)<br/>    enable_private_cluster = optional(bool, false)<br/>    master_ipv4_cidr_block = optional(string)<br/>    authorized_networks = optional(list(object({<br/>      cidr_block   = string<br/>      display_name = string<br/>    })), [])<br/>  })</pre> | `{}` | no |
+| <a name="input_custom_networking"></a> [custom\_networking](#input\_custom\_networking) | Custom networking configuration for shared VPC scenarios (required when enable\_custom\_networking is true) | <pre>object({<br/>    network_self_link             = optional(string)<br/>    subnetwork_self_link          = optional(string)<br/>    enable_private_cluster        = optional(bool, false)<br/>    master_ipv4_cidr_block        = optional(string)<br/>    cluster_secondary_range_name  = optional(string)<br/>    services_secondary_range_name = optional(string)<br/>    authorized_networks = optional(list(object({<br/>      cidr_block   = string<br/>      display_name = string<br/>    })), [])<br/>  })</pre> | `{}` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
+| <a name="input_enable_custom_networking"></a> [enable\_custom\_networking](#input\_enable\_custom\_networking) | Enable custom networking using existing VPC and subnet | `bool` | `false` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |

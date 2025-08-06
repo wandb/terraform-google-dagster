@@ -28,6 +28,8 @@ resource "google_sql_database_instance" "default" {
   database_version    = var.cloudsql_postgres_version
   name                = local.database_name
   deletion_protection = var.deletion_protection
+  project             = var.project_id
+  region              = var.region
 
   settings {
     tier              = var.cloudsql_tier
@@ -84,6 +86,7 @@ resource "google_sql_database_instance" "default" {
 resource "google_sql_database" "default" {
   name     = local.database_name
   instance = google_sql_database_instance.default.name
+  project  = var.project_id
 
   depends_on = [google_sql_database_instance.default]
 }
@@ -92,6 +95,7 @@ resource "google_sql_user" "default" {
   instance = google_sql_database_instance.default.name
   name     = local.master_username
   password = local.master_password
+  project  = var.project_id
 
   depends_on = [google_sql_database_instance.default]
 }

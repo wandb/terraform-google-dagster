@@ -42,8 +42,14 @@ variable "domain" {
   default     = "example"
 }
 
+variable "enable_custom_networking" {
+  description = "Enable custom networking using existing VPC and subnet"
+  type        = bool
+  default     = false
+}
+
 variable "custom_networking" {
-  description = "Custom networking configuration for shared VPC scenarios"
+  description = "Custom networking configuration for shared VPC scenarios (required when enable_custom_networking is true)"
   type = object({
     network_self_link      = optional(string)
     subnetwork_self_link   = optional(string)
@@ -55,6 +61,13 @@ variable "custom_networking" {
     })), [])
   })
   default = {}
+}
+
+# Optional IAP configuration for zero-trust setup
+variable "enable_iap_example" {
+  description = "Enable IAP example configuration (requires additional setup)"
+  type        = bool
+  default     = false
 }
 
 variable "oauth_client_id" {

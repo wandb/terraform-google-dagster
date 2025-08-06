@@ -32,7 +32,8 @@ module "dagster_infra" {
   domain     = var.domain
 
   # Custom networking configuration
-  custom_networking = var.custom_networking
+  enable_custom_networking = var.enable_custom_networking
+  custom_networking        = var.custom_networking
 
   # cloud_storage_bucket_location (default US)
   # cloudsql_postgres_version (default POSTGRES_14)
@@ -134,10 +135,13 @@ resource "helm_release" "dagster_service" {
 
 # Optional IAP resources for zero-trust example
 resource "google_compute_global_address" "dagster_ip" {
-  name = "${var.namespace}-dagster-ip"
+  count = var.enable_iap_example ? 1 : 0
+  name  = "${var.namespace}-dagster-ip"
 }
 
 resource "google_iap_web_iam_binding" "dagster_iap_binding" {
+  count = var.enable_iap_example && (length(var.iap_allowed_domains) > 0 || length(var.iap_allowed_users) > 0) ? 1 : 0
+
   members = concat(
     [for domain in var.iap_allowed_domains : "domain:${domain}"],
     [for user in var.iap_allowed_users : "user:${user}"]
@@ -146,6 +150,8 @@ resource "google_iap_web_iam_binding" "dagster_iap_binding" {
 }
 
 resource "kubernetes_secret" "iap_oauth_secret" {
+  count = var.enable_iap_example ? 1 : 0
+
   metadata {
     name      = "${var.namespace}-iap-oauth-secret"
     namespace = "default"
@@ -160,6 +166,7 @@ resource "kubernetes_secret" "iap_oauth_secret" {
 }
 
 resource "kubernetes_manifest" "dagster_backend_config" {
+  count = var.enable_iap_example ? 1 : 0
   manifest = {
     apiVersion = "cloud.google.com/v1"
     kind       = "BackendConfig"
@@ -188,7 +195,8 @@ resource "kubernetes_manifest" "dagster_backend_config" {
 }
 
 resource "google_compute_managed_ssl_certificate" "dagster_ssl_cert" {
-  name = "${var.namespace}-dagster-ssl-cert"
+  count = var.enable_iap_example ? 1 : 0
+  name  = "${var.namespace}-dagster-ssl-cert"
 
   managed {
     domains = [var.domain]
@@ -196,6 +204,8 @@ resource "google_compute_managed_ssl_certificate" "dagster_ssl_cert" {
 }
 
 resource "kubernetes_ingress_v1" "dagster_ingress" {
+  count = var.enable_iap_example ? 1 : 0
+
   metadata {
     name      = "${var.namespace}-dagster-ingress"
     namespace = "default"

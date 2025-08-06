@@ -14,6 +14,7 @@ terraform {
 }
 
 resource "google_artifact_registry_repository" "default" {
+  project       = var.project_id
   format        = "DOCKER"
   location      = var.location
   repository_id = "${var.namespace}-registry"

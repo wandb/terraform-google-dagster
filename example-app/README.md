@@ -55,6 +55,7 @@ iap_allowed_users   = ["admin@yourdomain.com"]
 domain = "dagster.yourdomain.com"
 
 # Optional: Custom networking for private cluster
+enable_custom_networking = true
 custom_networking = {
   network_self_link      = "projects/host-project/global/networks/shared-vpc"
   subnetwork_self_link   = "projects/host-project/regions/us-central1/subnetworks/shared-subnet"
@@ -112,11 +113,13 @@ After deployment, point your domain to the IAP ingress IP (available in `terrafo
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_custom_networking"></a> [custom\_networking](#input\_custom\_networking) | Custom networking configuration for shared VPC scenarios | <pre>object({<br/>    network_self_link      = optional(string)<br/>    subnetwork_self_link   = optional(string)<br/>    enable_private_cluster = optional(bool, false)<br/>    master_ipv4_cidr_block = optional(string)<br/>    authorized_networks = optional(list(object({<br/>      cidr_block   = string<br/>      display_name = string<br/>    })), [])<br/>  })</pre> | `{}` | no |
+| <a name="input_custom_networking"></a> [custom\_networking](#input\_custom\_networking) | Custom networking configuration for shared VPC scenarios (required when enable\_custom\_networking is true) | <pre>object({<br/>    network_self_link      = optional(string)<br/>    subnetwork_self_link   = optional(string)<br/>    enable_private_cluster = optional(bool, false)<br/>    master_ipv4_cidr_block = optional(string)<br/>    authorized_networks = optional(list(object({<br/>      cidr_block   = string<br/>      display_name = string<br/>    })), [])<br/>  })</pre> | `{}` | no |
 | <a name="input_dagster_deployment_image"></a> [dagster\_deployment\_image](#input\_dagster\_deployment\_image) | Image name of user code deployment | `string` | `"user-code-example"` | no |
 | <a name="input_dagster_deployment_tag"></a> [dagster\_deployment\_tag](#input\_dagster\_deployment\_tag) | User code deployment tag of Dagster to deploy | `string` | `"latest"` | no |
 | <a name="input_dagster_version"></a> [dagster\_version](#input\_dagster\_version) | Version of Dagster to deploy | `string` | `"0.14.3"` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | `"example"` | no |
+| <a name="input_enable_custom_networking"></a> [enable\_custom\_networking](#input\_enable\_custom\_networking) | Enable custom networking using existing VPC and subnet | `bool` | `false` | no |
+| <a name="input_enable_iap_example"></a> [enable\_iap\_example](#input\_enable\_iap\_example) | Enable IAP example configuration (requires additional setup) | `bool` | `false` | no |
 | <a name="input_iap_allowed_domains"></a> [iap\_allowed\_domains](#input\_iap\_allowed\_domains) | Domains allowed to access through IAP | `list(string)` | `[]` | no |
 | <a name="input_iap_allowed_users"></a> [iap\_allowed\_users](#input\_iap\_allowed\_users) | Users allowed to access through IAP | `list(string)` | `[]` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |

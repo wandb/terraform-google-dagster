@@ -22,6 +22,7 @@ resource "random_pet" "suffix" {
 }
 
 resource "google_storage_bucket" "file_storage" {
+  project  = var.project_id
   name     = "${var.namespace}-storage-${random_pet.suffix.id}"
   location = var.cloud_storage_bucket_location
 

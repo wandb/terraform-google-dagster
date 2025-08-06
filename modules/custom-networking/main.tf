@@ -11,12 +11,14 @@ terraform {
 
 # Data sources for existing custom networking
 data "google_compute_network" "custom" {
-  name = basename(var.network_self_link)
+  name    = basename(var.network_self_link)
+  project = var.project_id
 }
 
 data "google_compute_subnetwork" "custom" {
-  name   = basename(var.subnetwork_self_link)
-  region = var.region
+  name    = basename(var.subnetwork_self_link)
+  project = var.project_id
+  region  = var.region
 }
 
 # Service networking connection for custom VPC (needed for CloudSQL private IP)

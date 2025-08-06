@@ -8,6 +8,11 @@ variable "project_id" {
   type        = string
 }
 
+variable "region" {
+  description = "Google region"
+  type        = string
+}
+
 variable "cluster_compute_machine_type" {
   description = "Compute machine type to deploy cluster nodes on."
   type        = string
@@ -63,4 +68,16 @@ variable "authorized_networks" {
     display_name = string
   }))
   default = []
+}
+
+variable "cluster_secondary_range_name" {
+  description = "Name of the secondary range for cluster pods. If null, GKE will auto-create."
+  type        = string
+  default     = null
+}
+
+variable "services_secondary_range_name" {
+  description = "Name of the secondary range for cluster services. If null, GKE will auto-create."
+  type        = string
+  default     = null
 }

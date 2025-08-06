@@ -11,13 +11,20 @@ terraform {
 
 resource "google_container_cluster" "default" {
   name            = "${var.namespace}-cluster"
+  project         = var.project_id
+  location        = var.region
   networking_mode = "VPC_NATIVE"
   network         = var.network.self_link
   subnetwork      = var.subnetwork.self_link
 
   ip_allocation_policy {
-    cluster_ipv4_cidr_block  = "/14"
-    services_ipv4_cidr_block = "/19"
+    # Use provided secondary range names, otherwise let GKE auto-create
+    cluster_secondary_range_name  = var.cluster_secondary_range_name
+    services_secondary_range_name = var.services_secondary_range_name
+
+    # Only use auto-allocation if no secondary ranges are specified
+    cluster_ipv4_cidr_block  = var.cluster_secondary_range_name == null ? "/14" : null
+    services_ipv4_cidr_block = var.services_secondary_range_name == null ? "/19" : null
   }
 
   authenticator_groups_config {
@@ -81,6 +88,7 @@ resource "google_container_cluster" "default" {
 }
 
 resource "google_container_node_pool" "default" {
+  project = var.project_id
   name    = "default-node-pool"
   cluster = google_container_cluster.default.id
 

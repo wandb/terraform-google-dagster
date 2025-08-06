@@ -3,6 +3,11 @@ variable "namespace" {
   type        = string
 }
 
+variable "project_id" {
+  description = "Project ID"
+  type        = string
+}
+
 variable "service_account" {
   description = "The service account used to manage application services."
   type        = object({ email = string, account_id = string })
