@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.12.0](https://github.com/wandb/terraform-google-dagster/compare/v2.11.1...v2.12.0) (2025-08-18)
+
+
+### Features
+
+* Better database config ([#27](https://github.com/wandb/terraform-google-dagster/issues/27)) ([8095f02](https://github.com/wandb/terraform-google-dagster/commit/8095f02aef6e36434c797b996f95f4239b6ee81d))
+
 ### [2.11.1](https://github.com/wandb/terraform-google-dagster/compare/v2.11.0...v2.11.1) (2025-02-10)
 
 
