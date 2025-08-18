@@ -43,6 +43,18 @@ variable "cloudsql_availability_type" {
   default     = "ZONAL"
 }
 
+variable "cloudsql_edition" {
+  description = "The edition of the CloudSQL instance."
+  type        = string
+  default     = "ENTERPRISE"
+}
+
+variable "cloudsql_query_insights_enabled" {
+  description = "Whether to enable query insights."
+  type        = bool
+  default     = false
+}
+
 variable "cluster_compute_machine_type" {
   description = "Compute machine type to deploy cluster nodes on."
   type        = string

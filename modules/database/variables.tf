@@ -27,3 +27,13 @@ variable "cloudsql_availability_type" {
   description = "The availability type of the CloudSQL instance."
   type        = string
 }
+
+variable "cloudsql_edition" {
+  description = "The edition of the CloudSQL instance."
+  type        = string
+}
+
+variable "cloudsql_query_insights_enabled" {
+  description = "Whether to enable query insights."
+  type        = bool
+}

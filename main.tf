@@ -61,12 +61,14 @@ module "cluster" {
 }
 
 module "database" {
-  source                     = "./modules/database"
-  namespace                  = var.namespace
-  deletion_protection        = var.deletion_protection
-  cloudsql_postgres_version  = var.cloudsql_postgres_version
-  cloudsql_tier              = var.cloudsql_tier
-  cloudsql_availability_type = var.cloudsql_availability_type
+  source                          = "./modules/database"
+  namespace                       = var.namespace
+  deletion_protection             = var.deletion_protection
+  cloudsql_postgres_version       = var.cloudsql_postgres_version
+  cloudsql_tier                   = var.cloudsql_tier
+  cloudsql_availability_type      = var.cloudsql_availability_type
+  cloudsql_edition                = var.cloudsql_edition
+  cloudsql_query_insights_enabled = var.cloudsql_query_insights_enabled
 
   network_connection = module.networking.connection
 
