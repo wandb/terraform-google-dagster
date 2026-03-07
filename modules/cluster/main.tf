@@ -69,6 +69,20 @@ resource "google_container_node_pool" "default" {
     auto_upgrade = true
   }
 
+  upgrade_settings {
+    strategy = var.node_pool_upgrade_strategy
+
+    dynamic "blue_green_settings" {
+      for_each = var.node_pool_upgrade_strategy == "BLUE_GREEN" ? [1] : []
+      content {
+        standard_rollout_policy {
+          batch_percentage    = 1.0
+          batch_soak_duration = "0s"
+        }
+      }
+    }
+  }
+
   node_config {
     machine_type    = var.cluster_compute_machine_type
     service_account = var.service_account.email

@@ -77,3 +77,9 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "cluster_node_pool_upgrade_strategy" {
+  description = "Upgrade strategy for the default node pool. SURGE (default) replaces nodes one at a time. BLUE_GREEN provisions new nodes before draining old ones, allowing existing pods to continue running until drained. Note: changing this value on an existing cluster will cause the node pool to be recreated."
+  type        = string
+  default     = "SURGE"
+}
