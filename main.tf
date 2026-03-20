@@ -52,6 +52,7 @@ module "cluster" {
   cluster_node_pool_max_node_count = var.cluster_node_pool_max_node_count
   domain                           = var.domain
   cluster_monitoring_components    = var.cluster_monitoring_components
+  cluster_maintenance_policy       = var.cluster_maintenance_policy
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork

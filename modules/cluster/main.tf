@@ -36,6 +36,40 @@ resource "google_container_cluster" "default" {
     enable_components = var.cluster_monitoring_components
   }
 
+  dynamic "maintenance_policy" {
+    for_each = var.cluster_maintenance_policy != null ? [var.cluster_maintenance_policy] : []
+    content {
+      dynamic "daily_maintenance_window" {
+        for_each = maintenance_policy.value.daily_maintenance_window != null ? [maintenance_policy.value.daily_maintenance_window] : []
+        content {
+          start_time = daily_maintenance_window.value.start_time
+        }
+      }
+      dynamic "recurring_window" {
+        for_each = maintenance_policy.value.recurring_window != null ? [maintenance_policy.value.recurring_window] : []
+        content {
+          start_time = recurring_window.value.start_time
+          end_time   = recurring_window.value.end_time
+          recurrence = recurring_window.value.recurrence
+        }
+      }
+      dynamic "maintenance_exclusion" {
+        for_each = maintenance_policy.value.maintenance_exclusion != null ? maintenance_policy.value.maintenance_exclusion : []
+        content {
+          exclusion_name = maintenance_exclusion.value.exclusion_name
+          start_time     = maintenance_exclusion.value.start_time
+          end_time       = maintenance_exclusion.value.end_time
+          dynamic "exclusion_options" {
+            for_each = maintenance_exclusion.value.exclusion_options != null ? [maintenance_exclusion.value.exclusion_options] : []
+            content {
+              scope = exclusion_options.value.scope
+            }
+          }
+        }
+      }
+    }
+  }
+
   remove_default_node_pool = true
   initial_node_count       = 1
 
