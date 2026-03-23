@@ -43,3 +43,26 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "cluster_maintenance_policy" {
+  description = "GKE cluster maintenance policy. Allows configuring maintenance windows to control when automatic upgrades occur. If not set, GKE may perform maintenance at any time."
+  type = object({
+    daily_maintenance_window = optional(object({
+      start_time = string
+    }))
+    recurring_window = optional(object({
+      start_time = string
+      end_time   = string
+      recurrence = string
+    }))
+    maintenance_exclusion = optional(list(object({
+      exclusion_name = string
+      start_time     = string
+      end_time       = string
+      exclusion_options = optional(object({
+        scope = string
+      }))
+    })), [])
+  })
+  default = null
+}
