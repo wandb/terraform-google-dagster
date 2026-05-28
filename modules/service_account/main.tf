@@ -27,12 +27,6 @@ resource "google_service_account" "default" {
   description  = "Used by GKE node pools in ${var.namespace}."
 }
 
-resource "google_service_account_key" "default" {
-  service_account_id = google_service_account.default.name
-
-  depends_on = [google_service_account.default]
-}
-
 locals {
   roles = [
     "roles/monitoring.viewer",

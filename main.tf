@@ -80,10 +80,7 @@ module "registry" {
   namespace = var.namespace
   location  = var.region
 
-  service_account             = module.service_account.service_account
-  service_account_credentials = module.service_account.service_account_credentials
+  service_account = module.service_account.service_account
 
-  # Depends on cluster existing as Kubernetes secret will be created containing an imagePullSecret
-  # with Docker config for private registry
   depends_on = [module.cluster, module.service_account]
 }

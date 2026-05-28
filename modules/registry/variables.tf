@@ -12,8 +12,3 @@ variable "service_account" {
   description = "Service account used to grant registry IAM membership."
   type        = object({ email = string })
 }
-
-variable "service_account_credentials" {
-  description = "Service account json key to grant permissions for registry image pulling."
-  type        = string
-}
