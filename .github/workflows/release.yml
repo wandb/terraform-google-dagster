@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     # Skip running release workflow on forks
     if: github.repository_owner == 'wandb'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Generate GitHub App Token
         id: app-token
