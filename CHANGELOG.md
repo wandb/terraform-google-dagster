@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.13.0](https://github.com/wandb/terraform-google-dagster/compare/v2.12.0...v2.13.0) (2026-06-03)
+
+
+### Features
+
+* replace SA key imagePullSecret with Workload Identity node-level GAR access ([#34](https://github.com/wandb/terraform-google-dagster/issues/34)) ([c7d909e](https://github.com/wandb/terraform-google-dagster/commit/c7d909e0939588c728b7cfafa897ce13ecbe7a7b))
+
 ## [2.12.0](https://github.com/wandb/terraform-google-dagster/compare/v2.11.1...v2.12.0) (2025-08-18)
 
 
