@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.13.1](https://github.com/wandb/terraform-google-dagster/compare/v2.13.0...v2.13.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* Release versions for refactor, chore, and build commits ([#38](https://github.com/wandb/terraform-google-dagster/issues/38)) ([165db61](https://github.com/wandb/terraform-google-dagster/commit/165db61a06b94a5d6ee24d0ea05efcd70e43dec9))
+
 ## [2.13.0](https://github.com/wandb/terraform-google-dagster/compare/v2.12.0...v2.13.0) (2026-06-03)
 
 
