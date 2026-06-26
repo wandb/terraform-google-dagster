@@ -124,7 +124,7 @@ No providers.
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./modules/cluster | n/a |
 | <a name="module_database"></a> [database](#module\_database) | ./modules/database | n/a |
 | <a name="module_networking"></a> [networking](#module\_networking) | ./modules/networking | n/a |
-| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.0 |
+| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.2 |
 | <a name="module_registry"></a> [registry](#module\_registry) | ./modules/registry | n/a |
 | <a name="module_service_account"></a> [service\_account](#module\_service\_account) | ./modules/service_account | n/a |
 | <a name="module_storage"></a> [storage](#module\_storage) | ./modules/storage | n/a |
