@@ -30,7 +30,7 @@ terraform apply
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0, < 2.0.0 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 6.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 7.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.4 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.9 |
 
@@ -38,7 +38,7 @@ terraform apply
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 6.18.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | 7.38.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.17.0 |
 
 ## Modules

@@ -8,7 +8,7 @@ terraform {
     }
     google = {
       source  = "hashicorp/google"
-      version = "~> 6.0"
+      version = "~> 7.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -59,9 +59,6 @@ provider "helm" {
 locals {
   code_deployment_name = "pipelines"
   code_deployment_port = 9090
-  imagePullSecrets = [{ # tflint-ignore: terraform_naming_convention
-    name = module.dagster_infra.registry_image_pull_secret
-  }]
   user_deployment_values = {
     deployments = [
       {
@@ -75,7 +72,6 @@ locals {
         port               = local.code_deployment_port
       }
     ]
-    imagePullSecrets = local.imagePullSecrets
   }
   service_values = {
     dagsterWebserver = {
@@ -99,7 +95,6 @@ locals {
       postgresqlDatabase = module.dagster_infra.cloudsql_database.name
       postgresqlPassword = module.dagster_infra.cloudsql_database.password
     }
-    imagePullSecrets = local.imagePullSecrets
   }
 }
 

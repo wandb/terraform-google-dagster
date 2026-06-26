@@ -36,7 +36,7 @@ No providers.
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./modules/cluster | n/a |
 | <a name="module_database"></a> [database](#module\_database) | ./modules/database | n/a |
 | <a name="module_networking"></a> [networking](#module\_networking) | ./modules/networking | n/a |
-| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.0 |
+| <a name="module_project_factory_project_services"></a> [project\_factory\_project\_services](#module\_project\_factory\_project\_services) | terraform-google-modules/project-factory/google//modules/project_services | ~> 18.2 |
 | <a name="module_registry"></a> [registry](#module\_registry) | ./modules/registry | n/a |
 | <a name="module_service_account"></a> [service\_account](#module\_service\_account) | ./modules/service_account | n/a |
 | <a name="module_storage"></a> [storage](#module\_storage) | ./modules/storage | n/a |
@@ -74,7 +74,6 @@ No resources.
 | <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Id of provisioned Kubernetes cluster |
 | <a name="output_network_name"></a> [network\_name](#output\_network\_name) | Name of provisioned VPC network |
 | <a name="output_registry_image_path"></a> [registry\_image\_path](#output\_registry\_image\_path) | Docker image path of provisioned Artifact Registry |
-| <a name="output_registry_image_pull_secret"></a> [registry\_image\_pull\_secret](#output\_registry\_image\_pull\_secret) | Name of Kubernetes secret containing Docker config with permissions to pull from private Artifact Registry repository |
 | <a name="output_registry_location"></a> [registry\_location](#output\_registry\_location) | Location of provisioned Artifact Registry |
 | <a name="output_registry_name"></a> [registry\_name](#output\_registry\_name) | Name of provisioned Artifact Registry |
 | <a name="output_service_account"></a> [service\_account](#output\_service\_account) | Service account created to manage and authenticate services. |
