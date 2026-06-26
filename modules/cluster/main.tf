@@ -21,7 +21,7 @@ resource "google_container_cluster" "default" {
   }
 
   authenticator_groups_config {
-    security_group = "gke-security-groups@${var.domain}.com"
+    security_group = "gke-security-groups@${var.domain}"
   }
 
   workload_identity_config {
