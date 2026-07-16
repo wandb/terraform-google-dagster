@@ -38,7 +38,7 @@ terraform apply
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 7.38.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 7.40.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.17.0 |
 
 ## Modules

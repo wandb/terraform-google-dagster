@@ -73,6 +73,12 @@ variable "cluster_monitoring_components" {
   default     = ["SYSTEM_COMPONENTS"]
 }
 
+variable "cluster_secret_manager_addon_enabled" {
+  description = "Whether to enable the Secret Manager add-on for the GKE cluster."
+  type        = bool
+  default     = false
+}
+
 variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string

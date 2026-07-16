@@ -5,7 +5,7 @@ module "project_factory_project_services" {
 
   project_id = null
 
-  activate_apis = [
+  activate_apis = concat([
     "iam.googleapis.com",               # Service accounts
     "logging.googleapis.com",           # Logging
     "sqladmin.googleapis.com",          # Database
@@ -15,7 +15,7 @@ module "project_factory_project_services" {
     "artifactregistry.googleapis.com",  # Artifact Registry
     "container.googleapis.com",         # Kubernetes
     "compute.googleapis.com"            # Kubernetes
-  ]
+  ], var.cluster_secret_manager_addon_enabled ? ["secretmanager.googleapis.com"] : [])
   disable_dependent_services  = false
   disable_services_on_destroy = false
 }
@@ -45,19 +45,20 @@ module "networking" {
 }
 
 module "cluster" {
-  source                           = "./modules/cluster"
-  namespace                        = var.namespace
-  project_id                       = var.project_id
-  cluster_compute_machine_type     = var.cluster_compute_machine_type
-  cluster_node_pool_max_node_count = var.cluster_node_pool_max_node_count
-  domain                           = var.domain
-  cluster_monitoring_components    = var.cluster_monitoring_components
+  source                               = "./modules/cluster"
+  namespace                            = var.namespace
+  project_id                           = var.project_id
+  cluster_compute_machine_type         = var.cluster_compute_machine_type
+  cluster_node_pool_max_node_count     = var.cluster_node_pool_max_node_count
+  domain                               = var.domain
+  cluster_monitoring_components        = var.cluster_monitoring_components
+  cluster_secret_manager_addon_enabled = var.cluster_secret_manager_addon_enabled
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork
   service_account = module.service_account.service_account
 
-  depends_on = [module.networking, module.service_account]
+  depends_on = [module.networking, module.project_factory_project_services, module.service_account]
 }
 
 module "database" {

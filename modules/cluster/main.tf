@@ -32,6 +32,14 @@ resource "google_container_cluster" "default" {
     channel = "STABLE"
   }
 
+  dynamic "secret_manager_config" {
+    for_each = var.cluster_secret_manager_addon_enabled ? [true] : []
+
+    content {
+      enabled = true
+    }
+  }
+
   monitoring_config {
     enable_components = var.cluster_monitoring_components
   }
