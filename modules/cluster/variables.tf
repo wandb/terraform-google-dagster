@@ -24,6 +24,12 @@ variable "cluster_monitoring_components" {
   default     = []
 }
 
+variable "cluster_secret_manager_addon_enabled" {
+  description = "Whether to enable the Secret Manager add-on for the GKE cluster."
+  type        = bool
+  default     = false
+}
+
 variable "service_account" {
   description = "The service account associated with the GKE cluster instances that host Dagster."
   type        = object({ email = string })

@@ -37,6 +37,7 @@ module "dagster_infra" {
   # cloudsql_availability_type (default ZONAL)
   # cluster_compute_machine_type (default e2-standard-2)
   # cluster_node_pool_max_node_count (default 2)
+  # cluster_secret_manager_addon_enabled (default false)
   # deletion_protection (default true)
 }
 
