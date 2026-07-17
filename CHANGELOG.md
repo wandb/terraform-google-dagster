@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.14.0](https://github.com/wandb/terraform-google-dagster/compare/v2.13.1...v2.14.0) (2026-07-17)
+
+
+### Features
+
+* Add `cluster_secret_manager_addon_enabled` variable ([#39](https://github.com/wandb/terraform-google-dagster/issues/39)) ([e1e9b13](https://github.com/wandb/terraform-google-dagster/commit/e1e9b13521aeaa090b6e957881e03bb312d52bf5))
+
 ### [2.13.1](https://github.com/wandb/terraform-google-dagster/compare/v2.13.0...v2.13.1) (2026-06-26)
 
 
