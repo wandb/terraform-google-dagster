@@ -59,6 +59,7 @@ No resources.
 | <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_cluster_secret_manager_addon_enabled"></a> [cluster\_secret\_manager\_addon\_enabled](#input\_cluster\_secret\_manager\_addon\_enabled) | Whether to enable the Secret Manager add-on for the GKE cluster. | `bool` | `false` | no |
+| <a name="input_cluster_secret_manager_rotation_enabled"></a> [cluster\_secret\_manager\_rotation\_enabled](#input\_cluster\_secret\_manager\_rotation\_enabled) | Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on. | `bool` | `false` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
@@ -148,6 +149,7 @@ No resources.
 | <a name="input_cluster_monitoring_components"></a> [cluster\_monitoring\_components](#input\_cluster\_monitoring\_components) | Components to enable in the GKE monitoring stack. | `list(string)` | <pre>[<br/>  "SYSTEM_COMPONENTS"<br/>]</pre> | no |
 | <a name="input_cluster_node_pool_max_node_count"></a> [cluster\_node\_pool\_max\_node\_count](#input\_cluster\_node\_pool\_max\_node\_count) | Max number of nodes cluster can scale up to. | `number` | `2` | no |
 | <a name="input_cluster_secret_manager_addon_enabled"></a> [cluster\_secret\_manager\_addon\_enabled](#input\_cluster\_secret\_manager\_addon\_enabled) | Whether to enable the Secret Manager add-on for the GKE cluster. | `bool` | `false` | no |
+| <a name="input_cluster_secret_manager_rotation_enabled"></a> [cluster\_secret\_manager\_rotation\_enabled](#input\_cluster\_secret\_manager\_rotation\_enabled) | Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on. | `bool` | `false` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |

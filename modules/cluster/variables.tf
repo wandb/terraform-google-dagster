@@ -30,6 +30,12 @@ variable "cluster_secret_manager_addon_enabled" {
   default     = false
 }
 
+variable "cluster_secret_manager_rotation_enabled" {
+  description = "Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on."
+  type        = bool
+  default     = false
+}
+
 variable "service_account" {
   description = "The service account associated with the GKE cluster instances that host Dagster."
   type        = object({ email = string })

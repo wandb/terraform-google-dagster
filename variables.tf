@@ -79,6 +79,12 @@ variable "cluster_secret_manager_addon_enabled" {
   default     = false
 }
 
+variable "cluster_secret_manager_rotation_enabled" {
+  description = "Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on."
+  type        = bool
+  default     = false
+}
+
 variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
