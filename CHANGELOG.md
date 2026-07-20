@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.14.1](https://github.com/wandb/terraform-google-dagster/compare/v2.14.0...v2.14.1) (2026-07-20)
+
 ## [2.14.0](https://github.com/wandb/terraform-google-dagster/compare/v2.13.1...v2.14.0) (2026-07-17)
 
 
