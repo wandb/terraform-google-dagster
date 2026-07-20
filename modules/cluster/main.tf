@@ -33,10 +33,18 @@ resource "google_container_cluster" "default" {
   }
 
   dynamic "secret_manager_config" {
-    for_each = var.cluster_secret_manager_addon_enabled ? [true] : []
+    for_each = var.cluster_secret_manager_addon_enabled || var.cluster_secret_manager_rotation_enabled ? [true] : []
 
     content {
       enabled = true
+
+      dynamic "rotation_config" {
+        for_each = var.cluster_secret_manager_rotation_enabled ? [true] : []
+
+        content {
+          enabled = true
+        }
+      }
     }
   }
 
