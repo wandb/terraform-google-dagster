@@ -32,9 +32,9 @@ jobs:
           fetch-depth: 0
 
       - name: Release
-        uses: cycjimmy/semantic-release-action@v2
+        uses: cycjimmy/semantic-release-action@d9bf53a078bd2f86aaffaec796dbb3d28f1b6f34 # v8.1.3
         with:
-          semantic_version: 19.0.2
+          semantic_version: 20.1.3
           extra_plugins: |
             @semantic-release/changelog@6.0.1
             @semantic-release/git@10.0.1
