@@ -51,6 +51,16 @@ resource "google_sql_database_instance" "default" {
     }
 
     database_flags {
+      name  = "cloudsql.enable_pgaudit"
+      value = "on"
+    }
+
+    database_flags {
+      name  = "pgaudit.log"
+      value = "ddl,role"
+    }
+
+    database_flags {
       name  = "max_connections"
       value = "1000"
     }

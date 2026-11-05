@@ -88,6 +88,10 @@ resource "google_container_node_pool" "default" {
   node_config {
     machine_type    = var.cluster_compute_machine_type
     service_account = var.service_account.email
+
+    workload_metadata_config {
+      mode = "GKE_METADATA"
+    }
   }
 
   network_config {
