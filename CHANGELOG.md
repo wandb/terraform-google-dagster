@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [2.14.3](https://github.com/wandb/terraform-google-dagster/compare/v2.14.2...v2.14.3) (2026-11-05)
+
+
+### Bug Fixes
+
+* **security:** Enforce Workload Identity and pgAudit defaults ([#45](https://github.com/wandb/terraform-google-dagster/issues/45)) ([52145e5](https://github.com/wandb/terraform-google-dagster/commit/52145e5e145aa77aece31503d3b1a55c0e62642d))
+
 ### [2.14.2](https://github.com/wandb/terraform-google-dagster/compare/v2.14.1...v2.14.2) (2026-08-19)
 
 ### [2.14.1](https://github.com/wandb/terraform-google-dagster/compare/v2.14.0...v2.14.1) (2026-07-20)
