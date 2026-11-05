@@ -6,4 +6,5 @@ output "cloudsql_database" {
     password = google_sql_user.default.password
   }
   description = "Database connection parameters"
+  sensitive   = true
 }

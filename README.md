@@ -108,6 +108,21 @@ guidelines for best-practices laid out in [Terraform Best
 Practices](https://www.terraform-best-practices.com/), it would be recommended
 to follow these guidelines when submitting any contributions of your own.
 
+## Terraform tests
+
+The cluster and database modules use native Terraform tests with mocked providers.
+These tests inspect planned values without GCP credentials or infrastructure changes.
+Tests require Terraform 1.7 or later. CI uses 1.15.7. The module still supports Terraform 1.5.
+
+Select a supported test version instead of the repository's 1.5.3 pin, then run:
+
+```sh
+for module in cluster database; do
+  terraform -chdir="modules/$module" init -backend=false -input=false
+  terraform -chdir="modules/$module" test
+done
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
