@@ -91,7 +91,7 @@ variable "domain" {
 }
 
 variable "master_authorized_cidrs" {
-  description = "CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks."
+  description = "CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. Emptying a list that was set before can remove the restriction; check the plan."
   type        = list(string)
   default     = []
 }

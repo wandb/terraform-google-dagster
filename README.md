@@ -62,7 +62,7 @@ No resources.
 | <a name="input_cluster_secret_manager_rotation_enabled"></a> [cluster\_secret\_manager\_rotation\_enabled](#input\_cluster\_secret\_manager\_rotation\_enabled) | Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on. | `bool` | `false` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
-| <a name="input_master_authorized_cidrs"></a> [master\_authorized\_cidrs](#input\_master\_authorized\_cidrs) | CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. | `list(string)` | `[]` | no |
+| <a name="input_master_authorized_cidrs"></a> [master\_authorized\_cidrs](#input\_master\_authorized\_cidrs) | CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. Emptying a list that was set before can remove the restriction; check the plan. | `list(string)` | `[]` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
@@ -168,7 +168,7 @@ No resources.
 | <a name="input_cluster_secret_manager_rotation_enabled"></a> [cluster\_secret\_manager\_rotation\_enabled](#input\_cluster\_secret\_manager\_rotation\_enabled) | Whether to enable automatic rotation for Secret Manager CSI volumes. Enabling rotation also enables the Secret Manager add-on. | `bool` | `false` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Indicates whether or not storage and databases have deletion protection enabled | `bool` | `true` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain in which your Google Groups are defined. | `string` | n/a | yes |
-| <a name="input_master_authorized_cidrs"></a> [master\_authorized\_cidrs](#input\_master\_authorized\_cidrs) | CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. | `list(string)` | `[]` | no |
+| <a name="input_master_authorized_cidrs"></a> [master\_authorized\_cidrs](#input\_master\_authorized\_cidrs) | CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. Emptying a list that was set before can remove the restriction; check the plan. | `list(string)` | `[]` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace used as a prefix for all resources | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google region | `string` | n/a | yes |
