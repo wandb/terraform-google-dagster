@@ -89,3 +89,9 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "master_authorized_cidrs" {
+  description = "CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks."
+  type        = list(string)
+  default     = []
+}

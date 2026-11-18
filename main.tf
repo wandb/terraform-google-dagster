@@ -54,6 +54,7 @@ module "cluster" {
   cluster_monitoring_components           = var.cluster_monitoring_components
   cluster_secret_manager_addon_enabled    = var.cluster_secret_manager_addon_enabled
   cluster_secret_manager_rotation_enabled = var.cluster_secret_manager_rotation_enabled
+  master_authorized_cidrs                 = var.master_authorized_cidrs
 
   network         = module.networking.network
   subnetwork      = module.networking.subnetwork
