@@ -56,7 +56,9 @@ resource "google_container_cluster" "default" {
   initial_node_count       = 1
 
   # Restrict the public control-plane endpoint to these CIDRs. With an empty
-  # list the module does not set master authorized networks.
+  # list the module does not set master authorized networks. A non-empty list
+  # also turns off access from Google Cloud public IP ranges, so callers must
+  # list every Kubernetes API client range (runners, CI, operators).
   dynamic "master_authorized_networks_config" {
     for_each = length(var.master_authorized_cidrs) > 0 ? [true] : []
 
