@@ -55,3 +55,14 @@ variable "domain" {
   description = "The domain in which your Google Groups are defined."
   type        = string
 }
+
+variable "master_authorized_cidrs" {
+  description = "CIDR blocks allowed to reach the cluster's public control-plane endpoint. When empty, the module does not set master authorized networks. A non-empty list also blocks Google Cloud public IP ranges (gcp_public_cidrs_access_enabled = false). Include the egress ranges of every Kubernetes API client, such as Terraform runners that use the kubernetes or helm providers, CI and operators. Emptying a list that was set before can remove the restriction; check the plan."
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition     = alltrue([for c in var.master_authorized_cidrs : can(cidrhost(c, 0))])
+    error_message = "Each entry in master_authorized_cidrs must be a valid CIDR block, for example 192.0.2.0/24."
+  }
+}

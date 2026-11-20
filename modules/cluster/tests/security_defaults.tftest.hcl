@@ -24,3 +24,40 @@ run "workload_identity" {
     error_message = "The default node pool must use GKE_METADATA."
   }
 }
+
+run "master_authorized_networks_unset_by_default" {
+  command = plan
+
+  assert {
+    condition     = length(google_container_cluster.default.master_authorized_networks_config) == 0
+    error_message = "The module must not set master authorized networks when no CIDRs are given."
+  }
+}
+
+run "master_authorized_networks_restricts_endpoint" {
+  command = plan
+
+  variables {
+    master_authorized_cidrs = ["192.0.2.0/26", "198.51.100.0/28"]
+  }
+
+  assert {
+    condition     = toset([for b in google_container_cluster.default.master_authorized_networks_config[0].cidr_blocks : b.cidr_block]) == toset(["192.0.2.0/26", "198.51.100.0/28"])
+    error_message = "The cluster must allow exactly the given CIDRs."
+  }
+
+  assert {
+    condition     = google_container_cluster.default.master_authorized_networks_config[0].gcp_public_cidrs_access_enabled == false
+    error_message = "Google Cloud public IP ranges must not get control-plane access."
+  }
+}
+
+run "master_authorized_networks_rejects_invalid_cidr" {
+  command = plan
+
+  variables {
+    master_authorized_cidrs = ["not-a-cidr"]
+  }
+
+  expect_failures = [var.master_authorized_cidrs]
+}

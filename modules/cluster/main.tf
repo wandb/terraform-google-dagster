@@ -55,6 +55,26 @@ resource "google_container_cluster" "default" {
   remove_default_node_pool = true
   initial_node_count       = 1
 
+  # Restrict the public control-plane endpoint to these CIDRs. With an empty
+  # list the module does not set master authorized networks. A non-empty list
+  # also turns off access from Google Cloud public IP ranges, so callers must
+  # list every Kubernetes API client range (runners, CI, operators).
+  dynamic "master_authorized_networks_config" {
+    for_each = length(var.master_authorized_cidrs) > 0 ? [true] : []
+
+    content {
+      gcp_public_cidrs_access_enabled = false
+
+      dynamic "cidr_blocks" {
+        for_each = var.master_authorized_cidrs
+
+        content {
+          cidr_block = cidr_blocks.value
+        }
+      }
+    }
+  }
+
   # Disable client certificate authentication, which reduces the attack surface
   # for the cluster by disabling this deprecated feature. It defaults to false,
   # but this will make it explicit and quiet some security tooling.
